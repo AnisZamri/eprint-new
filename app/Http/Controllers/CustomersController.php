@@ -15,42 +15,35 @@ class CustomersController extends Controller
         return view ('customers.dashboard');
     }
 
-       public function CustomersProfile()
+    public function CustViewProfile()
     {
-        $customers=User::all();  
-        return view ('customers\profile\profile',compact('customers'));
+        return view ('customers\profile\viewProfile');
     }
 
-    // public function AddCustDetails(Request $request)
-    // {
-    //     $customers=Customers::insert([
-    //         'id' => Auth::user()->id,
-    //         'custFullName'=>$request->custFullName,
-    //         'custPhone'=>$request->custPhone,
-    //         'custAddress'=>$request->custAddress,
-    //         'created_at'=>Carbon::now()
-    //     ]);
-       
-    //     return view('customers\profileEdit ',compact('customers'));     
-    // }   
-
-    public function EditCustomersProfile()
-    {
-       $customers=Customers::all(); 
-        return view ('customers\profile\profileEdit',compact('customers'));
+    public function CustEditProfile($id){
+        $user=User::findOrFail($id);
+        return view ('customers\profile\editProfile',compact('user'));
     }
 
-    public function UpdateCustomersProfile(Request $request, $id)
-    {
-          
-        $customers=Customers::findOrFail($id)->update([
-            'custFullName'=>$request->custFullName,
-            'custPhone'=>$request->custPhone,
-            'custAddress'=>$request->custAddress,
+    public function CustUpdateProfile(Request $request, $id){
+        
+        User::find($id)->update([
+
+            'name'=>$request->name,
+            'email'=>$request->email,
             'created_at'=>Carbon::now()
             ]);
 
-            return redirect()->route('EditProfile');
-        }
+        Customers::insert([
+            'id'=>Auth::user()->id,
+            'custFullName'=>$request->custFullName,
+            'custPhone'=>$request->custPhone,
+            'custAddress'=>$request->custAddress,
+            'created_at' => Carbon::now()
+        ]);
+
+        return Redirect()->route('custViewProfile')->with('success','Profile Updated Successful');
+    }
+   
 
 }

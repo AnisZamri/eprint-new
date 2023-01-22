@@ -16,29 +16,61 @@ class StaffController extends Controller
         return view ('staffs.index');
     }
 
-    public function StaffProfile()
+    public function StaffViewProfile()
     {
         return view ('staffs\profile\viewProfile');
     }
 
 
-    public function StaffProfileEdit(){
-        $staff = Staffs::all;
-        return view ('staffs\profile\editProfile',compact('staff'));
+    public function StaffEditProfile($id){
+        $user=User::findOrFail($id);
+        return view ('staffs\profile\editProfile',compact('user'));
+    }
+
+    public function StaffUpdateProfile(Request $request, $id){
+        
+        User::find($id)->update([
+
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'created_at'=>Carbon::now()
+            ]);
+
+        Staffs::insert([
+            'id'=>Auth::user()->id,
+            'staffFullName'=>$request->staffFullName,
+            'staffPhone'=>$request->staffPhone,
+            'created_at' => Carbon::now()
+            
+        ]);
+
+        return Redirect()->route('staffViewProfile')->with('success','Profile Updated Successful');
     }
 
 
-    public function AddStaffDetails(Request $request)
-    {
-        Staffs::insert([
-            'id' => Auth::user()->id,
-            'staffFullName'=>$request->staffFullName,
-            'staffPhone'=>$request->staffPhone,
-            'created_at'=>Carbon::now()
-        ]);
+    // public function AddStaffDetails(Request $request)
+    // {
+    //     Staffs::insert([
+    //         'id' => Auth::user()->id,
+    //         'staffFullName'=>$request->staffFullName,
+    //         'staffPhone'=>$request->staffPhone,
+    //         'created_at'=>Carbon::now()
+    //     ]);
 
-        return Redirect()->back()->with('success',' Successful Inserted');
-    }    
+    //     return Redirect()->back()->with('success',' Successful Inserted');
+    // }    
    
+    // public function StaffProfileStore(Request $request,$id){
+     
+    //     User::find($id)->update([
+
+    //         'name'=>$request->name,
+    //         'email'=>$request->email,
+    //         'created_at'=>Carbon::now()
+    //         ]);
+       
+
+    //     return redirect()->route('staffViewProfile')->with('success','Staff Profile Successful Inserted');
+    // } //end method
 
 }

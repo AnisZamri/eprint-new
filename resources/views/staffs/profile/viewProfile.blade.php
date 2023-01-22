@@ -17,6 +17,11 @@
       <div class="row">
         <div class="col-xl-12">
 
+        @php
+                  $staffs= App\Models\Staffs::all()
+                  @endphp
+
+
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
             <img style="height=5000%;width=5000%" src="{{asset('staff/assets/img/profile2.png')}}" alt="Profile" >
@@ -36,27 +41,37 @@
                     <div class="col-lg-3 col-md-4 label ">Username</div>
                     <div class="col-lg-9 col-md-8">{{ Auth::user()->name }}</div>
                   </div>
-
+                  @foreach($staffs as $staffs)
+                  
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8"></div>
+                    <div class="col-lg-9 col-md-8">{{$staffs->staffFullName}}</div>
                   </div>
-
+                  
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Phone Number</div>
+                    <div class="col-lg-9 col-md-8">{{$staffs->staffPhone}}</div>
+                  </div>
+    
+                  @endforeach 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
                     <div class="col-lg-9 col-md-8">{{ Auth::user()->email }}</div>
                   </div>
+             
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Phone Number</div>
-                    <div class="col-lg-9 col-md-8"></div>
-                  </div>
-                  
-                  
+                
+                  @php
+                  $user= App\Models\User::all()
+                  @endphp
+
 
                 </div>
-
-                <a  href="{{ route('staffEditProfile') }}" class="btn btn-primary rounded-pill">Edit Profile</a>
+                @foreach($user as $user) 
+                      @if($user->id==Auth::user()->id)
+                        <a  href="{{ route('staffEditProfile',$user->id)}}" class="btn btn-primary rounded-pill">Edit Profile</a>
+                    @endif
+                @endforeach 
 
             </div>
           </div>

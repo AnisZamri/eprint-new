@@ -1,6 +1,7 @@
 @extends ('staffs.staffMaster')
 @section('content')
 
+<main id="main" class="main">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -8,7 +9,7 @@
       <h1>Profile</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ route('dashboard')  }}">Home</a></li>
+          <li class="breadcrumb-item"><a href="">Home</a></li>
           <li class="breadcrumb-item active">Profile</li>
           <li class="breadcrumb-item active">Edit Profile</li>
         </ol>
@@ -25,34 +26,34 @@
               <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <h5 class="card-title">Edit Profile</h5>
 
-                  <form method="post" action="{{ route('admin.profile.store')  }}" enctype="multipart/form-data" >
+                  <form  method="POST" action="{{ route('staffUpdateProfile', $user->id)  }}" enctype="multipart/form-data" >
                     @csrf
 
                     <div class="row mb-3">
-                      <label class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+                      <label class="col-md-4 col-lg-3 col-form-label">Username</label>
                       <div class="col-md-8 col-lg-9">
-                        <img id="showImage"  src="{{ (!empty($editData->profile_photo_path))? url('upload/adminImages/'.$editData->profile_photo_path):url('upload/no_image.png') }}" alt="Profile Image">
-                        <div class="row mb-3">
-                        <label class="col-md-4 col-lg-3 col-form-label"></label>
-                        <div class="col-sm-10">
-                          <input class="form-control" type="file" id="image" name="profile_photo_path">
-                        </div>
-                      </div>
+                        <input name="name" type="text" class="form-control" id="name" value="{{ Auth::user()->name }}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label class="col-md-4 col-lg-3 col-form-label">Name</label>
+                      <label class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="name" type="text" class="form-control" id="name" value="{{    $editData->name    }}">
+                        <input name="staffFullName" type="text" class="form-control" id="staffFullName" >
                       </div>
                     </div>
 
-                    
                     <div class="row mb-3">
                       <label class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="email" value="{{    $editData->email    }}">
+                        <input name="email" type="email" class="form-control" id="email" value="{{ Auth::user()->email }}">
+                      </div>
+                    </div>
+                  
+                    <div class="row mb-3">
+                      <label class="col-md-4 col-lg-3 col-form-label">Phone Number</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="staffPhone" type="staffPhone" class="form-control" id="staffPhone" value="">
                       </div>
                     </div>
                   
@@ -84,5 +85,6 @@
       </script>
 
     </section>
+    </main><!-- End #main -->
 
 @endsection
