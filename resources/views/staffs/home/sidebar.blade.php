@@ -67,7 +67,7 @@
   <li class="nav-heading">Pages</li>
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{ route ('StaffProfile') }">
+    <a class="nav-link collapsed" href="{{route('staffViewProfile')}}">
       <i class="bi bi-person"></i>
       <span>Profile</span>
     </a>

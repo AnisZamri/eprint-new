@@ -6,8 +6,11 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\InboxController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\SubProductsController;
 
 
@@ -48,6 +51,15 @@ Route::group(['middleware' => 'auth'], function () {
 
 /*********************STAFF*************************************/
 
+// All Admin Routes
+Route::get('admin/profile', [StaffController::class, 'StaffProfile'])->name('staffViewProfile');
+Route::get('admin/profile/edit', [StaffController::class, 'StaffProfileEdit'])->name('staffEditProfile');
+Route::post('admin/profile/edit', [StaffController::class, 'AdminProfileStore'])->name('admin.profile.store');
+Route::get('admin/change/password', [StaffController::class, 'AdminChangePassword'])->name('admin.change.password');
+Route::post('update/change/password', [StaffController::class, 'AdminUpdateChangePassword'])->name('update.change.password');
+Route::get('admin/logout', [StaffController::class, 'destroy'])->name('admin.logout');
+
+
 //Staff Add Product 
 Route::post('/staffs/products/staff_AddProduct', [ProductController::class,'AddProducts'])->name('addProducts');
 Route::get('/staff/products/staff_AddProduct', [ProductController::class,'ViewProduct'])->name('ViewProduct');
@@ -68,6 +80,19 @@ Route::get('/order/', [OrderController::class,'StaffViewOrder'])->name('viewOrde
 
 
 /*********************CUSTOMERS*************************************/
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+
+Route::get('/customers/profile', [CustomersController::class, 'CustomersProfile']);
+Route::get('/customers/editprofile', [CustomersController::class, 'EditCustomersProfile'])->name('EditProfile');
+Route::post('/customers/updateprofile/{id}', [CustomersController::class, 'UpdateCustomersProfile'])->name('UpdateProfile');
+
 Route::get('/customers/subproduct/cust_viewSubProduct/{id}', [IndexController::class,'ViewCustSubProduct'])->name('viewCustSubProduct');
 Route::get('/products/subproductsDetails/{id}', [IndexController::class,'CustViewSubProductsDetails'])->name('custViewSubProductDetails');
 

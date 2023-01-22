@@ -159,13 +159,13 @@ $customer= App\Models\Customers::all()
                                     
                                     <label for="check-payment">
                                         Cash
-                                        <input type="checkbox" id="check-payment">
+                                        <input type="radio" id="check-payment">
                                         <span class="checkmark"></span>
                                     </label>
 
                                     <label for="paypal">
                                         PayPal
-                                        <input type="checkbox" id="paypal">
+                                        <input type="radio" id="paypal">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>

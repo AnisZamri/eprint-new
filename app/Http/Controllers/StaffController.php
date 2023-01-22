@@ -18,8 +18,15 @@ class StaffController extends Controller
 
     public function StaffProfile()
     {
-        return view ('staffs\profile\profile');
+        return view ('staffs\profile\viewProfile');
     }
+
+
+    public function StaffProfileEdit(){
+        $staff = Staffs::all;
+        return view ('staffs\profile\editProfile',compact('staff'));
+    }
+
 
     public function AddStaffDetails(Request $request)
     {

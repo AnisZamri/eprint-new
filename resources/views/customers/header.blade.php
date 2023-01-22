@@ -111,7 +111,8 @@ body {
 
                                 <li><a href="{{ route('custViewOrder') }}">Orders</a></li>
 
-                                 
+                                <li><a href="{{route('profile.edit')}}">PROFILE LARAVEL</a></li>
+
                                         <li><a href="{{ url('customers/profile/')}}">PROFILE</a></li>
                                         <!-- <li><a href="{{ url('customers/editprofile/')}}">EDIT PROFILE</a></li> -->
 
