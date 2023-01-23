@@ -154,7 +154,7 @@ body {
                                 </div>
 
 
-                                <a href="{{ route('custCheckout')}}" style="text-align: center;" class="site-btn">Proceed to checkout</a>
+                                <a href="{{ route('custCheckout')}}" style="text-align: center;text-color:white" class="site-btn">Proceed to checkout</a>
 
                             </div>
                         </div>

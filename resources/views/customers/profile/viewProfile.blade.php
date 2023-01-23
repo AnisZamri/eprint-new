@@ -15,19 +15,22 @@
                       <div class="checkout__order" style="background-color:white">
                         <h5 style="padding-bottom:15px">PROFILE</h5>
                         @php
-                  $customers= App\Models\Customers::all()
-                  @endphp
-                          <div class="checkout__order__product">
+                        $customers= App\Models\Customers::all()
+                        @endphp
+                        
+                        <div class="checkout__order__product">
                             <ul>
                                    
                               <li><span class="top__text">Profile Details</span></li>
                               <li>Username<span style="margin-left:-1000px">{{ Auth::user()->name }}</span></li>
-                           
-                              @foreach($customers as $customers)
-                              <li>Full Name<span>{{$customers->custFullName}}</span></li>
-                              <li>Phone<span>{{$customers->custPhone}}</span></li>
                               <li>Email<span>{{ Auth::user()->email }}</span></li>
-                              <li>Address<span>{{$customers->custAddress}}</span></li>
+
+                              @foreach($customers as $customers)
+                                  @if($customers->id==Auth::user()->id)
+                                      <li>Full Name<span>{{$customers->custFullName}}</span></li>
+                                      <li>Phone<span>{{$customers->custPhone}}</span></li>
+                                      <li>Address<span>{{$customers->custAddress}}</span></li>
+                                  @endif
                               @endforeach
                             </ul>
                           </div>

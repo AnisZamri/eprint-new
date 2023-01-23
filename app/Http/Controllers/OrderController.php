@@ -71,18 +71,11 @@ class OrderController extends Controller
         $orders=Orders::all();
         $orderProducts=OrderProducts::all();
 
-        return view('staff.order.viewOrder',compact('orders','orderProducts'));
-    
-    }
-
-    public function CustViewOrder(){
-           
-        $orders=Orders::all();
-        $orderProducts=OrderProducts::all();
-
         return view('customers.order.cust_viewOrder',compact('orders','orderProducts'));
     
     }
+
+  
 
     public function StaffViewOrder(){
            

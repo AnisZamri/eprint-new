@@ -10,11 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CustomersController extends Controller
 {
-    public function CustomersDashboard()
-    {
-        return view ('customers.dashboard');
-    }
-
+   
     public function CustViewProfile()
     {
         return view ('customers\profile\viewProfile');

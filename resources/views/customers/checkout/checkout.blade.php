@@ -53,57 +53,68 @@
                 </div>
             </div>
  
+  
+
             @php
 $customer= App\Models\Customers::all()
-@endphp
-            <form action="{{ url('charge') }}" method="POST" enctype="multipart/form-data"  class="checkout__form">
- 
+@endphp     
+
+
+            <!-- <form action="{{ route('createOrder')}}" method="POST" id="cash" enctype="multipart/form-data"  class="checkout__form"></form> -->
+
+<form action="{{ url('charge') }}" id="paypal" method="POST" enctype="multipart/form-data"  class="checkout__form">                   
+
+
             @csrf
                 <div class="row">
                     <div class="col-lg-8">
                         <h5>Billing detail</h5>
                         <div class="row">
  
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p><b>Full Name <span></span></b></p>
-                                    <input type="text" name="orderName"  id="orderName" aria-describedby="emailHelp" value="Enter Name" >
-                                 
-                                </div>
-                            </div>
-                           
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                <p><b>Phone Number <span></span></b></p>
-                                    <input type="text" name="orderPhone"  id="orderPhone" aria-describedby="emailHelp" value="Enter Phone">
- 
-                                </div>
-                            </div>
- 
-                            <div class="col-lg-6 col-md-6 col-sm-6">
+                       
+                        <div class="col-lg-8 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                 <br><p><b>Email <span></span></b></p>
                                     <input type="text" name="orderEmail"  id="orderEmail" aria-describedby="emailHelp" value="{{ Auth::user()->email }}">
  
                                 </div>
                             </div>
+
+
+                            @foreach($customers as $customers)
+                                  @if($customers->id==Auth::user()->id)
+                            <div class="col-lg-8 col-md-6 col-sm-6">
+                                <div class="checkout__form__input">
+                                    <p><b>Full Name <span></span></b></p>
+                                    <input type="text" name="orderName"  id="cash" aria-describedby="emailHelp" value="{{$customers->custFullName}}" >
+                                 
+                                </div>
+                            </div>
+                           
+                            <div class="col-lg-8 col-md-6 col-sm-6">
+                                <div class="checkout__form__input">
+                                <p><b>Phone Number <span></span></b></p>
+                                    <input type="text" name="orderPhone"  id="cash" aria-describedby="emailHelp" value="0173415700">
+ 
+                                </div>
+                            </div>
+ 
                          
                             <div class="col-lg-12">
                                 <div class="checkout__form__input">
-                                <br><p><b>Address <span></span></b></p>
-                                <input type="text" name="orderAddress"  id="orderAddress" aria-describedby="emailHelp" value="Enter Address">
+                                <p><b>Address <span></span></b></p>
+                                <input type="text" name="orderAddress"  id="cash" aria-describedby="emailHelp" value="Batu 2, Jalan Ipoh">
  
                                 </div>
                                
                             </div>
- 
-                            <input type="text" name="orderStatus"  id="exampleInputEmail1" aria-describedby="emailHelp" value="pending" hidden>
- 
-                                               
-                         
- 
-                       
- 
+
+                            <input type="text" name="orderStatus"  id="cash" aria-describedby="emailHelp" value="pending" hidden>
+
+
+                            @endif
+                              @endforeach
+         
                     </div>
                 </div>
  
@@ -145,38 +156,44 @@ $customer= App\Models\Customers::all()
  
                                             @php $total += $details['price'] * $details['quantity'] @endphp
                                         @endforeach
-                                   
+                                     
+                                     
+
                                        
                                         <li>Subtotal <span>RM{{ $total }}</span></li>
-                                        <input type="text" name="amount"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
+                                        <input form="paypal" type="text" name="amount"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
                                      
                                         <li>Total <span>RM{{ $total }}</span></li>
+                                        <input type="orderTotalPrice" name="orderTotalPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
+
                                
                                     </ul>
                                 </div>
- 
-                                <div class="checkout__order__widget">
-                                    
-                                    <label for="check-payment">
-                                        Cash
-                                        <input type="checkbox" id="check-payment">
-                                        <span class="checkmark"></span>
-                                    </label>
 
-                                    <label for="paypal">
-                                        PayPal
-                                        <input type="checkbox" id="paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                
-                             
+
+                                <div class="checkout__order__total" style="margin-top:-35px">
+                                    <ul>
+                                        <li>Payment Method</li>
+                               
+                                        <input type="radio" id="html" name="fav_language" value="cash" onclick="text(0)">
+                                        <label for="html">Cash</label><br>
+
+                                        <input type="radio" id="html" name="fav_language" value="paypal" onclick="text(1)">
+                                        <label for="html">Paypal</label><br>
+                                        
+                                        <div id="mycode">
+                                        <input form="paypal" class="button" type="submit" name="submit" value="PayPal"><br>
+                                        </div>
+
+                                    </ul>
+
+                                    </div>
                        
-                                <input class="button" type="submit" name="submit" value="PayPal"><br>
+    
  
  
  
-                                <br><button type="submit" class="site-btn">Place order</button>
+                                <br><button id="cash" type="submit" class="site-btn">Place order</button>
  
        
                              
@@ -201,15 +218,13 @@ $customer= App\Models\Customers::all()
  
  
         <script>
-function myFunction() {
-  var checkBox = document.getElementById("acc");
-  var text = document.getElementById("text");
-  if (checkBox.checked == true){
-    text.style.display = "block";
-  } else {
-     text.style.display = "none";
-  }
-}
+ function text(x)
+                {
+                    if (x==1) document.getElementById("mycode").style.display="block";
+                    else document.getElementById("mycode").style.display="none";
+                    return;
+                }
+
 </script>
     </body>
  

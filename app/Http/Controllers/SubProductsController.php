@@ -17,6 +17,14 @@ class SubProductsController extends Controller
 
     }
 
+    public function ViewSubProduct(){
+
+        $products=ProductCategory::orderBy('productCategory','ASC')->get();
+        $subproduct=SubProducts::all();
+        return view('staffs\subproducts\staff_ViewSubProduct',compact('subproduct','products'));
+    }     
+
+
     public function AddSubProducts(Request $request)
     {
         $validatedData = $request->validate([
@@ -59,13 +67,7 @@ class SubProductsController extends Controller
 
     }
 
-    public function ViewSubProduct(){
-
-        $products=ProductCategory::orderBy('productCategory','ASC')->get();
-        $subproduct=SubProducts::all();
-        return view('staffs\subproducts\staff_ViewSubProduct',compact('subproduct','products'));
-    }     
-
+    
     public function EditSubProduct($id){
         $products=ProductCategory::orderBy('productCategory')->get();
         $subproduct=SubProducts::findOrFail($id);

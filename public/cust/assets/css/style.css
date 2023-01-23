@@ -2443,6 +2443,8 @@ ol {
 
 .checkout__order .site-btn {
 	width: 100%;
+	border-radius: 5px;
+
 }
 
 .checkout__order__product {
