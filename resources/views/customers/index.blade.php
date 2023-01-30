@@ -1,5 +1,4 @@
 @extends ('customers.main_master')
-
 @section('content')
 
 <section class="categories">
@@ -28,58 +27,56 @@
  </div>
 </section>
 
+    <!-- Shop Section Begin -->
 
 <section class="product spad">
- <div class="container">
-     <div class="row">
-         <div class="col-lg-4 col-md-4">
-             <div class="section-title">
-                 <h4>All products</h4>
-             </div>
-         </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="section-title">
+                <h4>All products</h4>
 
+                </div>
+            </div>
+        </div>
 
-         @php
+	
+        @php
     $products = App\Models\ProductCategory::orderBy('productCategory','ASC')->get();
   	@endphp
 
-	  <div class="row property__gallery" >
-			@foreach($products as $product)
+
+
+     <div class="row property__gallery" >
+     @foreach($products as $product)
 				<div class="col-lg-3 col-md-4 col-sm-6 mix women">
 					<div class="product__item" >
-                      <a href="{{ route('viewCustSubProduct',$product->id)}}">
-							<div class="product__item__pic set-bg">
-								<img src="{{asset($product->productImage)}}">
-										
-							</div>
-						<div class="product__item__text">
-						<h6><a href="{{url('/products/subproducts')}}">{{$product->productCategory}}</a></h6>
+                    <a href="{{ route('viewCustSubProduct',$product->id)}}">
 
-								<div class="rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
-						</div>
+							<div class="product__item__pic set-bg">
+                            <img src="{{asset($product->productImage)}}">
+							</div>
+
+                            <div class="product__item__text">
+                            <h6><a href="{{url('/products/subproducts')}}">{{$product->productCategory}}</a></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                            </div>
 					</div>
 				</div>
 			@endforeach
       	</div>
-         
-     </div>
 
- 
-
-
-       
- </div>
-
-
+		  
+	</div>
 </section>
-
-
+<!-- Shop Section End -->
+    
 
 
 @endsection

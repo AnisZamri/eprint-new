@@ -77,36 +77,46 @@ foreach ($variations as $variation) {
                     <thead>
                     <tr> 
                     <th>No</th>
-					<th>Order Date</th>
-					<th>Product</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-					<th>Payment Status</th>
+					<th>Time</th>
+                  <th>Name</th>
+					<th>Total Price</th>
                   <th>Order Status</th>
+                  <th>Action</th>
+
 
                     </tr> 
 
                     </thead>
-                    @php($i=1)
+
+     
 
                     <tbody>
-              @foreach($orderProducts as $orderProducts) 
+                    @php($i=1)
+
+              @foreach($orders as $orders) 
+
 						    <tr class="alert" role="alert">
-                  <td>{{$i++}}</td> 
-                  <td>{{$orderProducts->created_at}}</td> 
-                  <td>{{$orderProducts->orderProduct}}</td> 
-                  <td>{{$orderProducts->orderQuantity}}</td> 
-                  <td>{{$orderProducts->orderPrice}}</td> 
-						      <td class="status"><span class="active">Paid</span></td>
-                  <td class="status"><span class="waiting">Pending</span></td>
-<td>
-						      	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				            	<span aria-hidden="true"><i class="fa fa-close"></i></span>
-				          	</button>
+                <td>{{$i++}}</td> 
+                  <td>{{$orders->created_at}}</td> 
+                  <td>{{$orders->orderName}}</td> 
+                  <td>RM{{$orders->orderTotalPrice}}</td> 
+                  <td>{{$orders->orderStatus}}</td> 
+
+                  <td>
+
+
+                    <a href="{{ route('updateOrderStatus',$orders->id)}}" class="btn btn-info" title="Edit Data"><i class="fa fa-eye"></i> </a>
+                 
+            
+                  @endforeach
+
+
+                  </td> 
+
+						      	
 				        	</td>
 						    </tr>
 
-                @endforeach
 
 						   
 		

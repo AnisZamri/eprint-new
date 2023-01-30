@@ -187,6 +187,10 @@
               </ul>
             </div>
 
+            @php
+                  $orders= App\Models\Orders::all()
+                  @endphp
+
             <div class="card-body">
               <h5 class="card-title">Recent Order <span>| </span></h5>
 
@@ -201,41 +205,24 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row"><a href="#">1</a></th>
-                    <td>Sarah Afiqah</td>
-                    <td>Car Sticker</a></td>
-                    <td>64</td>
-                    <td><span class="badge bg-success">Approved</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#">2</a></th>
-                    <td>Aiman</td>
-                    <td>Banner 2x5</a></td>
-                    <td>77</td>
-                    <td><span class="badge bg-warning">Pending</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#">3</a></th>
-                    <td>Danial Arif</td>
-                    <td>Wall Calendar</a></td>
-                    <td>147</td>
-                    <td><span class="badge bg-success">Approved</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#">4</a></th>
-                    <td>Siti Zulaikha</td>
-                    <td>Sticker 5cm</td>
-                    <td>79</td>
-                    <td><span class="badge bg-danger">Rejected</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#">5</a></th>
-                    <td>Raihana</td>
-                    <td>Flyers 100pcs</a></td>
-                    <td>165</td>
-                    <td><span class="badge bg-success">Approved</span></td>
-                  </tr>
+
+                @php($i=1)
+
+                @foreach($orders as $orders) 
+
+						    <tr class="alert" role="alert">
+                <td>{{$i++}}</td> 
+                  <td>{{$orders->created_at}}</td> 
+                  <td>{{$orders->orderName}}</td> 
+                  <td>RM{{$orders->orderTotalPrice}}</td> 
+                  <td>{{$orders->orderStatus}}</td> 
+
+                  <td>
+
+
+                 
+            
+                  @endforeach
                 </tbody>
               </table>
 

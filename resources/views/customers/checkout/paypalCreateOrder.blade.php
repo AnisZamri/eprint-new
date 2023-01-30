@@ -53,25 +53,18 @@
                 </div>
             </div>
  
-  
-
             @php
 $customer= App\Models\Customers::all()
-@endphp     
-
-
-            <!-- <form action="{{ route('createOrder')}}" method="POST" id="cash" enctype="multipart/form-data"  class="checkout__form"></form> -->
-
-<form action="{{ route('checkoutStore')}}" id="paypal" method="POST" enctype="multipart/form-data"  class="checkout__form">                   
-
-
+@endphp
+<form action="{{ url('charge') }}" id="paypal" method="POST" enctype="multipart/form-data"  class="checkout__form">                   
+ 
             @csrf
                 <div class="row">
                     <div class="col-lg-8">
                         <h5>Billing detail</h5>
                         <div class="row">
- 
-                       
+
+                            
                         <div class="col-lg-8 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                 <br><p><b>Email <span></span></b></p>
@@ -80,10 +73,10 @@ $customer= App\Models\Customers::all()
                                 </div>
                             </div>
 
-
-                            @foreach($customers as $customers)
+ 
+                        @foreach($customers as $customers)
                                   @if($customers->id==Auth::user()->id)
-                            <div class="col-lg-8 col-md-6 col-sm-6">
+                                  <div class="col-lg-8 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p><b>Full Name <span></span></b></p>
                                     <input type="text" name="orderName"  id="cash" aria-describedby="emailHelp" value="{{$customers->custFullName}}" >
@@ -111,106 +104,101 @@ $customer= App\Models\Customers::all()
 
                             <input type="text" name="orderStatus"  id="cash" aria-describedby="emailHelp" value="pending" hidden>
 
-
                             @endif
                               @endforeach
-         
+ 
+                       
+ 
                     </div>
                 </div>
  
- 
-                        <div class="col-lg-4">
-                            <div class="checkout__order">
-                                <h5>Your order</h5>
-                                <div class="checkout__order__product">
-                                    <ul>
-                                        <li>
-                                            <span class="top__text">Product</span>
-                                            <span class="top__text__right">Total</span>
-                                        </li>
- 
-                                        @if(session('cart'))
-                                             @foreach(session('cart') as $id => $details)
- 
-                                            <li>{{ $details['product_name'] }}<span>RM{{ $details['price'] * $details['quantity'] }}</span></li>
- 
- 
-                         
-                                            @endforeach
-                                         @endif
- 
- 
-                                    </ul>
-                                </div>
- 
- 
- 
-                             
- 
-                                <div class="checkout__order__total">
-                                    <ul>
- 
-                                        @php $total = 0 @endphp
- 
-                                        @foreach((array) session('cart') as $id => $details)
- 
-                                            @php $total += $details['price'] * $details['quantity'] @endphp
-                                        @endforeach
-                                     
-                                     
-
-                                       
-                                        <li>Subtotal <span>RM{{ $total }}</span></li>
-                                        <input form="paypal" type="text" name="amount"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
-                                     
-                                        <li>Total <span>RM{{ $total }}</span></li>
-                                        <input type="orderTotalPrice" name="orderTotalPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
-
-                               
-                                    </ul>
-                                </div>
-
-                                <h5 class="panel-title mt-20">Select Payment Method: </h5>
+                <div class="row">
 
 
+<div class="col-lg-4">
+    <div class="checkout__order" style="background:white">
+        <h5>Your order</h5>
+        <div class="checkout__order__product">
+            <ul>
+                <li>
+                    <span class="top__text">Product</span>
+                    <span class="top__text__right">Total</span>
+                </li>
+
+                @if(session('cart'))
+                     @foreach(session('cart') as $id => $details)
+
+                    <li>{{ $details['product_name'] }}<span>RM{{ $details['price'] * $details['quantity'] }}</span></li>
 
 
-                            <div class="card">
-                                <div class="card-header" id="#payment-1" style="height:100px">
-                                    <h5 class="panel-title">
-                                        <input type="radio" id="html" name="payment_method" value="paypal">
-                                        <label for="html">Paypal</label><br><br>
-                                        <img src="{{asset('staff/assets/img/paypal.png')}}"  style="width:90px; height:40px; margin-top:-20px; ">
-                                    </h5>
-                                </div>
-                            </div><br>
-
-                            <div class="card">
-                                <div class="card-header" id="#payment-2" style="height:100px">
-                                    <h5 class="panel-title">
-                                        <input type="radio" id="html" name="payment_method" value="cash">
-                                        <label for="html">Cash</label><br><br>
-                                        <img src="{{asset('staff/assets/img/cash.png')}}"  style="width:90px;height:40px; margin-top:-40px; ; ">
-                                    </h5>
-                                </div>
-                            </div>
-                                </div>
-
-
-<input type="submit" class="site-btn"  name="submit" value="Place Order">
-
-                              
  
- 
- 
- 
-       
-                             
-                                   
-                            </div>
-                            </div>
-                        </div>
+                    @endforeach
+                 @endif
+
+
+            </ul>
+        </div>
+
+        <div class="checkout__order__total">
+            <ul>
+
+                @php $total = 0 @endphp
+
+                @foreach((array) session('cart') as $id => $details)
+
+                    @php $total += $details['price'] * $details['quantity'] @endphp
+                @endforeach
+             
+                <li>Subtotal <span>RM{{ $total }}</span></li>
+                <input form="paypal" type="text" name="amount"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
+             
+                <li>Total <span>RM{{ $total }}</span></li>
+                <input type="orderTotalPrice" name="orderTotalPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
+     
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="col-lg-5">
+    <div class="checkout__order" style="background:white">
+        <h5>Payment method</h5>
+             
+            <div class="checkout__order__product">
+                <div class="card">
+                <div class="card-header" id="#payment-2" style="height:100px">
+                    <h5 class="panel-title">
+                        <label value="cash" name="payment_method"for="html">Paypal</label><br><br>
+                        <img src="{{asset('staff/assets/img/paypal.png')}}"  style="width:90px;height:40px; margin-top:-40px; margin-left:-15px;; ">
+                    </h5>
+                </div>
+            </div>
+   
+    <ul>
+                <li><br>
+                 
+                    <span class="top__text">Once a payment or deposit is made, it is non-refundable.</span>
+
+   <span style="color:white" class="top__text"> Abagus Printing, Jalan 1/64, 5</span>
+
+
+
+
+                </li>
+
+               
+                <div id="mycode">
+                                        <input form="paypal" class="button" type="submit" name="submit" value="PayPal"><br>
+                                        </div>
+            </ul>
+        </div>
+
+                     
                     </div>
+
+
             </form>
  
    
@@ -227,13 +215,15 @@ $customer= App\Models\Customers::all()
  
  
         <script>
- function text(x)
-                {
-                    if (x==1) document.getElementById("mycode").style.display="block";
-                    else document.getElementById("mycode").style.display="none";
-                    return;
-                }
-
+function myFunction() {
+  var checkBox = document.getElementById("acc");
+  var text = document.getElementById("text");
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+}
 </script>
     </body>
  

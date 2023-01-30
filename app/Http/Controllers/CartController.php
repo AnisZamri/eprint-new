@@ -66,9 +66,9 @@ class CartController extends Controller
     public function CustCheckout()
     {  
         $users=User::all();
-        $products=ProductCategory::all();
         $customers=Customers::all();
-        return view ('customers\checkout\checkout',compact('users','products','customers'));
+        $products=ProductCategory::all();
+        return view ('customers\checkout\checkout',compact('users','customers','products'));
     }
 
     
