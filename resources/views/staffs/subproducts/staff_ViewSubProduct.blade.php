@@ -21,10 +21,10 @@
 
                <!-- Add Modal -->
                <div style="float:right">
-               
-                <a href=" {{ route('viewAddSubProducts') }}"class="btn btn-primary ">Add Sub Product</a> <br>
-
-              </div><br>
+                <button type="button"  style="margin-bottom:10px" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                  Add Sub Product
+                </button>
+              </div>
 
 
               <br><div class="modal fade" id="basicModal" tabindex="-1">
@@ -39,7 +39,7 @@
 
                     <div class="modal-body">
 
-                      <form action="" method="POST" enctype="multipart/form-data">  
+                    <form action="{{ route('addSubProducts')}}" method="POST" enctype="multipart/form-data">  
                           @csrf 
                                           
                           <div class="row mb-3">
@@ -70,26 +70,33 @@
                                     <span class="text-danger">{{$message}}</span> 
                                 @enderror 
                           </div> 
-                       
-                                    
+
+                                                                             
                           <div class="mb-3"> 
-                                <label for="subProductQuantity" class="form-label">Product Quantity</label> 
-                                <input type="text" name="subProductQuantity" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> 
+                                <label for="subProductSize" class="form-label">Product Size</label> 
+                                <input type="text" name="subProductSize" class="form-control" id="subProductSize" aria-describedby="emailHelp" > 
                                 @error('productName') 
                                     <span class="text-danger">{{$message}}</span> 
                                 @enderror 
                           </div> 
 
+                                                                             
+                          <div class="mb-3"> 
+                                <label for="subProductShape" class="form-label">Product Shape</label> 
+                                <input type="text" name="subProductShape" class="form-control" id="subProductShape" aria-describedby="emailHelp" > 
+                                @error('productName') 
+                                    <span class="text-danger">{{$message}}</span> 
+                                @enderror 
+                          </div> 
+                                                          
                           <div class="mb-3"> 
                                 <label for="subProductPrice" class="form-label">Product Price</label> 
                                 <input type="text" name="subProductPrice" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> 
                                 @error('productName') 
                                     <span class="text-danger">{{$message}}</span> 
                                 @enderror 
-                          </div> 
-
-                
-                                                
+                          </div>               
+                               
                           <div class="mb-3"> 
                                 <label for="subProductDesc" class="form-label">Product Description</label> 
                                 <input type="text" name="subProductDesc" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> 
@@ -98,27 +105,22 @@
                                 @enderror 
                           </div> 
 
-                     
-                                              
+                                  
                           <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="submit" class="btn btn-primary">Add Product</button>
+                              <button type="submit" class="btn btn-primary">Add Sub Product</button>
                           </div>
 
-                      </form> 
+
+
+            </form> 
+
                     </div>
                   </div>
                 </div>
               </div>
     </section>
 
-    <!-- $subproducts = SubProducts::find($id);
-$variations = $product->variations;
-
-foreach ($variations as $variation) {
-    echo $variation->name . ': ' . $variation->price;
-}-->
-         
+  
 
 @if (session('success')) 
 
@@ -175,11 +177,12 @@ foreach ($variations as $variation) {
                             <td>{{$subproduct->subProductName}}</td> 
                             <td>{{$subproduct->subProductSize}}</td> 
                             <td>{{$subproduct->subProductShape}}</td> 
-                            <td>{{$subproduct->subProductPrice}}</td> 
+                            <td>RM{{$subproduct->subProductPrice}}</td> 
                             
                             <td>
-                              <a href=" {{ route('editSubProduct', $subproduct->id ) }}"class="btn btn-secondary">Edit</a> 
-                                <a href="{{url('sub/delete/'.$subproduct->id)}}"class="btn btn-danger">Delete</a> 
+                            <a href=" {{ route('editSubProduct', $subproduct->id ) }}" class="btn btn-secondary"><i class="bi bi-pen-fill"></i> </a>
+                            <a href="{{url('sub/delete/'.$subproduct->id)}}" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger"><i class="bi bi-trash-fill"></i> </a>
+
                             </td> 
 
                           </tr> 

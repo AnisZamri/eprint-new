@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Orders;
 use App\Models\User;
-use App\Models\OrderProducts;
-
+use App\Models\Orders;
 use App\Models\Products;
+
+use App\Models\Customers;
 use App\Models\SubProducts;
 
 use Illuminate\Http\Request;
+use App\Models\OrderProducts;
 use Illuminate\Support\Carbon;
+use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -76,6 +78,36 @@ class OrderController extends Controller
     }
 
   
+    public function CheckoutStore(Request $request){
+        if($request->payment_method == 'paypal'){
+            return Redirect()->route('paypalCheckout');
+
+        }elseif($request->payment_method == 'cash'){
+            return Redirect()->route('cashCheckout');
+        }
+    }
+
+    public function CashCheckout()
+    {  
+        $users=User::all();
+        $products=ProductCategory::all();
+        $customers=Customers::all();
+        return view ('customers\checkout\cashCheckout',compact('users','products','customers'));
+    }
+
+    public function PaypalCheckout()
+    {  
+        $users=User::all();
+        $products=ProductCategory::all();
+        $customers=Customers::all();
+        return view('customers.checkout.paypalCreateOrder',compact('users','products','customers'));
+
+    }
+
+
+
+
+    /////////////////////////////staff////////////////////////////////
 
     public function StaffViewOrder(){
            
@@ -86,13 +118,32 @@ class OrderController extends Controller
     
     }
 
+
+
+
     public function showLatest(){
    
         return view('showLatest');
     
     }
 
-  
+    public function UpdateOrderStatus($id){
+        $orders=Orders::findOrFail($id);
+        $orderProducts=OrderProducts::findOrFail($id);
 
+
+       return view('staffs.order.updateOrderStatus',compact('orders','orderProducts'));
+
+    }
+    
+    public function UpdateStatus(Request $request,$id){
+     
+        Orders::find($id)->update([ 
+        'orderStatus'=>$request->orderStatus,
+    ]);
+
+        return Redirect()->route('viewOrder');
+      
+    }
     
 }

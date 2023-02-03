@@ -150,7 +150,7 @@ body {
 
                                     <div class="dropdown" >
 
-                                        <i class="icon_bag_alt" data-toggle="dropdown"aria-hidden="true"></i>  
+                                        <i class="icon_cart_alt" data-toggle="dropdown"aria-hidden="true"></i>  
                                         <span class="tip">{{ count((array) session('cart')) }}</span>
                                     
 

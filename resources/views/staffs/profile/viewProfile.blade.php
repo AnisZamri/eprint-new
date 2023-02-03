@@ -69,16 +69,42 @@
                 </div>
                 @foreach($user as $user) 
                       @if($user->id==Auth::user()->id)
-                        <a  href="{{ route('staffEditProfile',$user->id)}}" class="btn btn-primary rounded-pill">Edit Profile</a>
+                        <a  href="{{ route('staffEditProfile',$user->id)}}" class="btn btn-primary ">Edit Profile</a>
                     @endif
                 @endforeach 
 
             </div>
           </div>
 
-        </div>
-      </div>
-    </section>
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column ">
+            <h5 class="card-title">Delete Account</h5>
+
+            <div class="alert alert-warning">
+              <p><b>Are you sure you want to delete your account?</b></p>
+              <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
+            </div>
+                  
+            <form id="formAccountDeactivation" onsubmit="return false">
+            <div class="form-check mb-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="accountActivation"
+                id="accountActivation"
+              />
+              <label class="form-check-label" for="accountActivation"
+                >I confirm my account deactivation</label
+              >
+            </div>
+            <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
+          </form>
+             
+            </div>
+          </div>
+
+          
+        
     </main><!-- End #main -->
 
     @endsection

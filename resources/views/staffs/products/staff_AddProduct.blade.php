@@ -118,9 +118,11 @@
                         <td>{{$products->productCategory}}</td> 
 
 
-                        <td>        
-                        <a href=" {{ route('editProduct', $products->id ) }}"class="btn btn-secondary ">Edit</a> 
-                          <a href="{{url('products/delete/'.$products->id)}}"class="btn btn-danger ">Delete</a> 
+                        <td>       
+                        <a href="{{ route('editProduct', $products->id ) }}" class="btn btn-secondary"><i class="bi bi-pen-fill"></i> </a>
+
+                        <a href="{{url('products/delete/'.$products->id)}}" class="btn btn-danger"><i class="bi bi-trash-fill"></i> </a>
+
  </td> 
                       </tr> 
                     @endforeach 

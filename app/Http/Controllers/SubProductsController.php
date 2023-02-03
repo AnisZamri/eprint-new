@@ -45,18 +45,12 @@ class SubProductsController extends Controller
         $subProductImage->move($up_location,$img_name);
 
 
-        $arrayToString=implode(',',$request->input('subProductSize'));
-        $subproducts['subProductSize']=$arrayToString;
-
-        $arrayToString=implode(',',$request->input('subProductShape'));
-        $subproducts['subProductShape']=$arrayToString;
-
              SubProducts::insert([
             'productsId'=>$request->productsId,
             'subProductImage'=>$last_img,
             'subProductName'=>$request->subProductName,
-            'subProductSize'=>$subproducts['subProductSize'],
-            'subProductShape'=>$subproducts['subProductShape'],
+            'subProductSize'=>$request->subProductSize,
+            'subProductShape'=>$request->subProductShape,
             'subProductDesc'=>$request->subProductDesc,
             'subProductPrice'=>$request->subProductPrice,
             'created_at'=>Carbon::now()

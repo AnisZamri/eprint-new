@@ -15,7 +15,7 @@
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
 
           <div class="card">
             <div class="card-body">
@@ -101,7 +101,6 @@
                           </div> 
                     
                           <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                               <button type="submit" class="btn btn-primary">Update</button>
 
                               

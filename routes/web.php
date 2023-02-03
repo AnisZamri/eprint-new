@@ -78,7 +78,11 @@ Route::get('/sub/edit/{id}', [SubProductsController::class,'EditSubProduct'])->n
 Route::post('/sub/update/{id}', [SubProductsController::class,'UpdateSubProduct'])->name('updateSubProduct');
 Route::get('/sub/delete/{id}', [SubProductsController::class,'DeleteSubProduct']);
 
-Route::get('/order/', [OrderController::class,'StaffViewOrder'])->name('viewOrder');
+Route::get('/order', [OrderController::class,'StaffViewOrder'])->name('viewOrder');
+Route::get('/orderStatus/{id}', [OrderController::class,'UpdateOrderStatus'])->name('updateOrderStatus');
+Route::post('/status/{id}', [OrderController::class,'UpdateStatus'])->name('updateStatus');
+
+
 
 
 /*********************CUSTOMERS*************************************/
@@ -100,17 +104,25 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //Cust Order
-    Route::get('/products/subproducts/checkout', [CartController::class,'CustCheckout'])->name('custCheckout');
-    Route::get('/products/subproducts/checkoutorder', [CartController::class,'CustCheckoutOrder'])->name('checkoutCreateOrder');
+    Route::get('/products/subproducts/checkout', [CartController::class,'CustCheckout'])->name('custCheckout');     //pergi page isi nama
+
+    Route::post('/products/subproducts/checkoutorder', [CartController::class,'CustCheckoutOrder'])->name('checkoutCreateOrder');      //create order lepas paymetn gi page sec
 
     //Cust Paypal Payment
     Route::get('payment', [PaymentController::class,'index']);
-    Route::post('charge', [PaymentController::class,'charge']);
+    Route::post('charge', [PaymentController::class,'charge'])->name('charge');
     Route::get('success', [PaymentController::class,'success']);
     Route::get('error', [PaymentController::class,'error']);
 
     //Cust Create Order
-    Route::post('/customers/order/cust_checkout', [OrderController::class,'CreateOrder'])->name('createOrder');
+    Route::post('/checkoutStore', [OrderController::class,'CheckoutStore'])->name('checkoutStore');
+
+    Route::get('/cashCheckout', [OrderController::class,'CashCheckout'])->name('cashCheckout');
+    Route::get('/paypalCheckout', [OrderController::class,'PaypalCheckout'])->name('paypalCheckout');
+
+
+
+    Route::post('createOrder', [OrderController::class,'CreateOrder'])->name('createOrder');
     Route::get('/customers/order/order', [OrderController::class,'ViewOrder'])->name('custViewOrder');
 
 });
