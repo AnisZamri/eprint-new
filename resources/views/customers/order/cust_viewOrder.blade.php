@@ -8322,15 +8322,17 @@ h1, h2, h3, h4, h5,
 	<body>
 	<section class="ftco-section">
 		<div class="container">
+    <h4 style="margin-top:-70px" >My Orders</h4>
+
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">My Orders</h2>
+					              
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="table-wrap">
-						<table class="table table-responsive-xl">
+						<table style="margin-top:-1000px" class="table table-responsive-xl" id="myTable">
 						  <thead>
 						    <tr>
 						    	<th>No</th>
@@ -8340,9 +8342,10 @@ h1, h2, h3, h4, h5,
                   <th>Price</th>
 						      <th>Payment Status</th>
                   <th>Order Status</th>
+                  <th>View</th>
+
                   
 
-						      <th>&nbsp;</th>
 						    </tr>
 						  </thead>
 
@@ -8355,14 +8358,11 @@ h1, h2, h3, h4, h5,
                   <td>{{$orderProducts->created_at}}</td> 
                   <td>{{$orderProducts->orderProduct}}</td> 
                   <td>{{$orderProducts->orderQuantity}}</td> 
-                  <td>{{$orderProducts->orderPrice}}</td> 
+                  <td>RM{{$orderProducts->orderPrice}}</td> 
 						      <td class="status"><span class="active">Paid</span></td>
                   <td class="status"><span class="waiting">Pending</span></td>
-<td>
-						      	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				            	<span aria-hidden="true"><i class="fa fa-close"></i></span>
-				          	</button>
-				        	</td>
+                  <td><a href="" class="btn btn-secondary"><i class="fa fa-eye"></i> </a></td>
+
 						    </tr>
 
                 @endforeach

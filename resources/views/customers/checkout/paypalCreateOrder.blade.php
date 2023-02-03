@@ -60,75 +60,59 @@ $customer= App\Models\Customers::all()
  
             @csrf
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <h5>Billing detail</h5>
                         <div class="row">
-
-                            
-                        <div class="col-lg-8 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                <br><p><b>Email <span></span></b></p>
-                                    <input type="text" name="orderEmail"  id="orderEmail" aria-describedby="emailHelp" value="{{ Auth::user()->email }}">
- 
-                                </div>
-                            </div>
-
- 
-                        @foreach($customers as $customers)
-                                  @if($customers->id==Auth::user()->id)
-                                  <div class="col-lg-8 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p><b>Full Name <span></span></b></p>
-                                    <input type="text" name="orderName"  id="cash" aria-describedby="emailHelp" value="{{$customers->custFullName}}" >
-                                 
-                                </div>
-                            </div>
-                           
                             <div class="col-lg-8 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                <p><b>Phone Number <span></span></b></p>
-                                    <input type="text" name="orderPhone"  id="cash" aria-describedby="emailHelp" value="{{$customers->custPhone}}">
- 
-                                </div>
-                            </div>
- 
-                         
-                            <div class="col-lg-12">
-                                <div class="checkout__form__input">
-                                <p><b>Address <span></span></b></p>
-                                <input type="text" name="orderAddress"  id="cash" aria-describedby="emailHelp" value="{{$customers->custAddress}}">
- 
-                                </div>
-                               
-                            </div>
+                                    <div class="checkout__form__input">
+                                        <input type="hidden" name="orderEmail"  id="orderEmail" aria-describedby="emailHelp" value="{{ Auth::user()->email }}">
+                                    </div>
 
-                            <input type="text" name="orderStatus"  id="cash" aria-describedby="emailHelp" value="pending" hidden>
+    
+                                    @foreach($customers as $customers)
+                                    @if($customers->id==Auth::user()->id)
+                                        <div class="col-lg-8 col-md-6 col-sm-6">
+                                            <div class="checkout__form__input">
+                                                <input type="hidden" name="orderName"  id="cash" aria-describedby="emailHelp" value="{{$customers->custFullName}}" >
+                                            </div>
+                                        </div>
+                            
+                                        <div class="col-lg-8 col-md-6 col-sm-6">
+                                            <div class="checkout__form__input">
+                                                <input type="hidden" name="orderPhone"  id="cash" aria-describedby="emailHelp" value="{{$customers->custPhone}}">
+                                            </div>
+                                        </div>
+            
+                                        <div class="col-lg-12">
+                                            <div class="checkout__form__input">
+                                                <input type="hidden" name="orderAddress"  id="cash" aria-describedby="emailHelp" value="{{$customers->custAddress}}">
+                                            </div>
+                                        </div>
 
-                            @endif
-                              @endforeach
- 
-                       
- 
-                    </div>
-                </div>
+                                        <input type="hidden" name="orderStatus"  id="cash" aria-describedby="emailHelp" value="pending" hidden>
+
+                                    @endif
+                                    @endforeach
+                            </div>
+                        </div>
  
                 <div class="row">
 
 
-<div class="col-lg-4">
+<div class="col-lg-7">
     <div class="checkout__order" style="background:white">
         <h5>Your order</h5>
         <div class="checkout__order__product">
             <ul>
                 <li>
                     <span class="top__text">Product</span>
-                    <span class="top__text__right">Total</span>
+                    <span style="margin-right:30px" class="top__text__right">Total</span>
                 </li>
 
                 @if(session('cart'))
                      @foreach(session('cart') as $id => $details)
 
-                    <li>{{ $details['product_name'] }}<span>RM{{ $details['price'] * $details['quantity'] }}</span></li>
+                    <li>{{ $details['product_name'] }}<span style="margin-right:30px">RM{{ $details['price'] * $details['quantity'] }}</span></li>
 
 
  
@@ -149,10 +133,10 @@ $customer= App\Models\Customers::all()
                     @php $total += $details['price'] * $details['quantity'] @endphp
                 @endforeach
              
-                <li>Subtotal <span>RM{{ $total }}</span></li>
+                <li>Subtotal <span style="margin-right:30px">RM{{ $total }}</span></li>
                 <input form="paypal" type="text" name="amount"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
              
-                <li>Total <span>RM{{ $total }}</span></li>
+                <li>Total <span style="margin-right:30px">RM{{ $total }}</span></li>
                 <input type="orderTotalPrice" name="orderTotalPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
      
             </ul>
@@ -162,7 +146,7 @@ $customer= App\Models\Customers::all()
 </div>
 
 
-<div class="col-lg-5">
+<div class="col-lg-4">
     <div class="checkout__order" style="background:white">
         <h5>Payment method</h5>
              
@@ -170,7 +154,7 @@ $customer= App\Models\Customers::all()
                 <div class="card">
                 <div class="card-header" id="#payment-2" style="height:100px">
                     <h5 class="panel-title">
-                        <label value="cash" name="payment_method"for="html">Paypal</label><br><br>
+                        <label value="paypal" name="payment_method"for="html">Paypal</label><br><br>
                         <img src="{{asset('staff/assets/img/paypal.png')}}"  style="width:90px;height:40px; margin-top:-40px; margin-left:-15px;; ">
                     </h5>
                 </div>

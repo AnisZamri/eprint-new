@@ -77,7 +77,7 @@ foreach ($variations as $variation) {
                     <thead>
                     <tr> 
                     <th>No</th>
-					<th>Time</th>
+					<th>Date</th>
                   <th>Name</th>
 					<th>Total Price</th>
                   <th>Order Status</th>

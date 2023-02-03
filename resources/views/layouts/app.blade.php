@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="{{asset('cust/assets/css/owl.carousel.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('cust/assets/css/slicknav.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('cust/assets/css/style.css')}}" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
@@ -73,50 +74,38 @@
 
     @if(auth()->user()->is_admin != true)
 
-        <!-- Header Section Begin -->
-        <header class="header">
-            <div class="container-fluid">
-                <div class="row">
-
-                    <div class="col-xl-3 col-lg-2">
-                        <div class="header__logo">
-                            <a href="{{asset('staff/assets/img/abLogo.png')}}"><img src="{{asset('staff/assets/img/abLogo.png')}}"  style=" margin-top:-10px; margin-bottom:-30px; height:70px;"alt=""></a>
-
-                        </div>
-                    </div>
-
-                    <div class="col-xl-6 col-lg-7">
-                        <nav class="header__menu">
-                            <ul>
-                                <li class="active"><a href="{{ url('/') }}">Home</a></li>
-                                <li><a href="">Products</a></li>
-                                    
-                                @if (Route::has('login'))
+    <header class="header" style="height:90px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-3 col-lg-2">
+                <div class="header__logo">
+                <a href="{{asset('staff/assets/img/abLogo.png')}}"><img src="{{asset('staff/assets/img/abLogo.png')}}"  style=" margin-top:-10px; margin-bottom:-30px; height:70px;"alt=""></a>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-7">
+                <nav class="header__menu">
+                    <ul>
+                        <li><a href="{{ url('/') }}">Home</a></li>
+                        <li><a href="#">Products</a></li>
+                        @if (Route::has('login'))
                                     @auth
                                     <li><a class="nav-link" href="{{ route('inbox.index') }}">Chat</a></li>
-
+    
                                     <li><a href="{{ route('custViewOrder') }}">Orders</a></li>
 
-                                    
-                                            <li><a href="{{ url('customers/profile/')}}">PROFILE</a></li>
+                                            <li><a href="{{ route('custViewProfile') }}">PROFILE</a></li>
                                             <!-- <li><a href="{{ url('customers/editprofile/')}}">EDIT PROFILE</a></li> -->
-
-                                    
-
-                                        <li><a  href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                                    {{ __('Logout') }}
-                                        </a></li>
-                
+    
+                                     
+    
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
                                         </form>
-
+    
                                             @else
-
+    
                                             <li><a href="./contact.html">Contact</a></li>
-
+    
                                                 <div class="header__right__auth">
                                                     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
                                             
@@ -124,29 +113,40 @@
                                                         <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
                                                     @endif
                                                 </div>
-
-
-                                    @endauth
+    
+    
+                                     @endauth
                                 @endif
+                        <!-- <li><a href="#">Pages</a>
+                            <ul class="dropdown">
+                                <li><a href="./product-details.html">Product Details</a></li>
+                                <li><a href="./shop-cart.html">Shop Cart</a></li>
+                                <li><a href="./checkout.html">Checkout</a></li>
+                                <li><a href="./blog-details.html">Blog Details</a></li>
+                            </ul>
+                        </li> -->
 
+                        <!-- <li><a href="./blog.html">Blog</a></li>
+                        <li><a href="./contact.html">Contact</a></li> -->
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3">
+                <div class="header__right">
+                  
+                    <ul class="header__right__widget">
+                    <div class="dropdown" >
 
+                    <i class="icon_cart_alt" data-toggle="dropdown"aria-hidden="true"></i>  
+                    <span class="tip">{{ count((array) session('cart')) }}</span>
 
-                                <div class="header__right__widget" >
-
-                                    <ul class="offcanvas__widget" >
-
-                                        <div class="dropdown" >
-
-                                            <i class="icon_bag_alt" data-toggle="dropdown"aria-hidden="true"></i>  
-                                            <span class="tip">{{ count((array) session('cart')) }}</span>
-                                        
-
-                                            <div class="dropdown-menu">
+                     
+                        <div class="dropdown-menu">
                                                 <div class="row total-header-section">
                                                     @php $total = 0 @endphp
                                                     @foreach((array) session('cart') as $id => $details)
                                                         @php $total += $details['price'] * $details['quantity'] @endphp
-
+    
                                                         
                                                     @endforeach
                                                     <div class="col-lg-12 col-sm-12 col-12 total-section text-right">
@@ -154,7 +154,7 @@
                                                     </div>
                                                 
                                                 </div>
-
+    
                                                 @if(session('cart'))
                                                     @foreach(session('cart') as $id => $details)
                                                         <div class="row cart-detail">
@@ -168,268 +168,266 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-
+    
                                                 <div class="row">
                                                     <div class="col-lg-12 col-sm-12 col-12 text-center checkout">
                                                         <a href="{{ route('viewCartTest') }}" class="btn btn-primary btn-block">View all</a>
                                                     </div>
                                                 </div>
-
+    
                                             </div>
-                                        </div>
-                                    </ul>
-                                </div>
 
-                            </ul>
-                        </nav>
-                    </div>
-
+                                            <li><a class="fa fa-sign-out" style="display: inline;margin-left:10px" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                   
+                                        </a></li>
                 
+                      </a></li>
+                      </div>
 
-                                                
+                    </ul>
+                    
                 </div>
             </div>
-    </header>
+        </div>
+        <div class="canvas__open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
+
+
         @else
           
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
-        <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center justify-content-between">
 
-        <div class="img_container3">
-            <img src=" {{asset('staff/assets/img/abLogo.png')}}" style=" margin-top:8px; height:50px;" >
-            </div>
+    <div class="img_container3">
+        <img src=" {{asset('staff/assets/img/abLogo.png')}}" style=" margin-top:8px; height:50px;" >
+        </div>
+
+
+ 
+ <span class="app-brand-text  menu-text fw-bolder " style="margin-left:5px; font-size: 20px;" >Abagus E-Print</span>
+</a>
+
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+    
+
+      
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <span class="d-none d-md-block dropdown-toggle ps-2">Staff</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Staff</h6>
+              <span>Web Designer</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>Account Settings</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="{{ route ('index') }}">
+                <i class="bi bi-question-circle"></i>
+                <span>Homepage</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"> 
+                  <i class="bx bx-power-off me-2"></i>
+                  <span class="align-middle">Log Out</span>
+                </a>                       
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                </form>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
 
 
 
-        <span class="app-brand-text  menu-text fw-bolder " style="margin-left:5px; font-size: 20px;" >Abagus E-Print</span>
+              <!-- ======= Sidebar ======= -->
+ <aside id="sidebar" class="sidebar">
+
+<ul class="sidebar-nav" id="sidebar-nav">
+
+  <li class="nav-item">
+    <a class="nav-link " href="{{ route ('index') }}">
+      <i class="bi bi-grid"></i>
+      <span>Homepage</span>
+    </a>
+  </li><!-- End Dashboard Nav -->
+
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-menu-button-wide"></i><span>Products</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          
+      <li>
+      <a href="{{ route ('ViewProduct') }}">
+          <i class="bi bi-circle"></i><span>Manage Category</span>
         </a>
-
+      </li>
+      
+      <li>
+      <a href="{{ route ('ViewSubProduct') }}">
+          <i class="bi bi-circle"></i><span>Manage Sub Products</span>
         </a>
-        <i class="bi bi-list toggle-sidebar-btn"></i>
-        </div><!-- End Logo -->
+      </li>
 
-        <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
-            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-        </form>
-        </div><!-- End Search Bar -->
+  
+      
+      
+      
+    </ul>
+  </li><!-- End Components Nav -->
 
-        <nav class="header-nav ms-auto">
-        <ul class="d-flex align-items-center">
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-journal-text"></i><span>Order</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+      <a href="{{ route('viewOrder') }}">
+          <i class="bi bi-circle"></i><span>Manage Orders</span>
+        </a>
+      </li>
+     
+    </ul>
+  </li><!-- End Forms Nav -->
 
-            <li class="nav-item d-block d-lg-none">
-            <a class="nav-link nav-icon search-bar-toggle " href="#">
-                <i class="bi bi-search"></i>
-            </a>
-            </li><!-- End Search Icon-->
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-journal-text"></i><span>Chat</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="{{ route('inbox.index') }}">
+          <i class="bi bi-circle"></i><span>Manage Chat</span>
+        </a>
+      </li>
+      
+     
+    </ul>
+  </li><!-- End Forms Nav -->
 
-            <li class="nav-item dropdown">
+  <li class="nav-heading">Pages</li>
 
-            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                <i class="bi bi-bell"></i>
-                <span class="badge bg-primary badge-number">4</span>
-            </a><!-- End Notification Icon -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="{{route('staffViewProfile')}}">
+      <i class="bi bi-person"></i>
+      <span>Profile</span>
+    </a>
+  </li><!-- End Profile Page Nav -->
 
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                <li class="dropdown-header">
-                You have 4 new notifications
-                <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                </li>
-                <li>
-                <hr class="dropdown-divider">
-                </li>
+ <!--<li class="nav-item">
+    <a class="nav-link collapsed" href="pages-contact.html">
+      <i class="bi bi-envelope"></i>
+      <span>Contact</span>
+    </a>
+  </li>--><!-- End Contact Page Nav -->
 
-                <li class="notification-item">
-                <i class="bi bi-exclamation-circle text-warning"></i>
-                <div>
-                    <h4>Lorem Ipsum</h4>
-                    <p>Quae dolorem earum veritatis oditseno</p>
-                    <p>30 min. ago</p>
-                </div>
-                </li>
+  <!--<li class="nav-item">
+    <a class="nav-link collapsed" href="pages-register.html">
+      <i class="bi bi-card-list"></i>
+      <span>Register</span>
+    </a>
+  </li>--><!-- End Register Page Nav -->
 
-                <li>
-                <hr class="dropdown-divider">
-                </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="pages-login.html">
+      <i class="bi bi-box-arrow-in-right"></i>
+      <span>Logout</span>
+    </a>
+  </li><!-- End Login Page Nav -->
 
-                <li class="notification-item">
-                <i class="bi bi-x-circle text-danger"></i>
-                <div>
-                    <h4>Atque rerum nesciunt</h4>
-                    <p>Quae dolorem earum veritatis oditseno</p>
-                    <p>1 hr. ago</p>
-                </div>
-                </li>
+  <!--<li class="nav-item">
+    <a class="nav-link collapsed" href="pages-error-404.html">
+      <i class="bi bi-dash-circle"></i>
+      <span>Error 404</span>
+    </a>
+  </li>--><!-- End Error 404 Page Nav -->
 
-                <li>
-                <hr class="dropdown-divider">
-                </li>
+  <!--<li class="nav-item">
+    <a class="nav-link collapsed" href="pages-blank.html">
+      <i class="bi bi-file-earmark"></i>
+      <span>Blank</span>
+    </a>
+  </li>--><!-- End Blank Page Nav -->
 
-                <li class="notification-item">
-                <i class="bi bi-check-circle text-success"></i>
-                <div>
-                    <h4>Sit rerum fuga</h4>
-                    <p>Quae dolorem earum veritatis oditseno</p>
-                    <p>2 hrs. ago</p>
-                </div>
-                </li>
+</ul>
 
-                <li>
-                <hr class="dropdown-divider">
-                </li>
-
-                <li class="notification-item">
-                <i class="bi bi-info-circle text-primary"></i>
-                <div>
-                    <h4>Dicta reprehenderit</h4>
-                    <p>Quae dolorem earum veritatis oditseno</p>
-                    <p>4 hrs. ago</p>
-                </div>
-                </li>
-
-                <li>
-                <hr class="dropdown-divider">
-                </li>
-                <li class="dropdown-footer">
-                <a href="#">Show all notifications</a>
-                </li>
-
-            </ul><!-- End Notification Dropdown Items -->
-
-            </li><!-- End Notification Nav -->
-
-            <li class="nav-item dropdown">
-
-            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                <i class="bi bi-chat-left-text"></i>
-                <span class="badge bg-success badge-number">3</span>
-            </a><!-- End Messages Icon -->
-
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                <li class="dropdown-header">
-                You have 3 new messages
-                <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                </li>
-                <li>
-                <hr class="dropdown-divider">
-                </li>
-
-                <li class="message-item">
-                <a href="#">
-                    <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                    <div>
-                    <h4>Maria Hudson</h4>
-                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                    <p>4 hrs. ago</p>
-                    </div>
-                </a>
-                </li>
-                <li>
-                <hr class="dropdown-divider">
-                </li>
-
-                <li class="message-item">
-                <a href="#">
-                    <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                    <div>
-                    <h4>Anna Nelson</h4>
-                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                    <p>6 hrs. ago</p>
-                    </div>
-                </a>
-                </li>
-                <li>
-                <hr class="dropdown-divider">
-                </li>
-
-                <li class="message-item">
-                <a href="#">
-                    <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                    <div>
-                    <h4>David Muldon</h4>
-                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                    <p>8 hrs. ago</p>
-                    </div>
-                </a>
-                </li>
-                <li>
-                <hr class="dropdown-divider">
-                </li>
-
-                <li class="dropdown-footer">
-                <a href="#">Show all messages</a>
-                </li>
-
-            </ul><!-- End Messages Dropdown Items -->
-
-            </li><!-- End Messages Nav -->
-
-            <li class="nav-item dropdown pe-3">
-
-            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                <span class="d-none d-md-block dropdown-toggle ps-2">Staff</span>
-            </a><!-- End Profile Iamge Icon -->
-
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                <li class="dropdown-header">
-                <h6>Staff</h6>
-                <span>Web Designer</span>
-                </li>
-                <li>
-                <hr class="dropdown-divider">
-                </li>
-
-                <li>
-                <a class="dropdown-item d-flex align-items-center" href="">
-                    <i class="bi bi-person"></i>
-                    <span>My Profile</span>
-                </a>
-                </li>
-                <li>
-                <hr class="dropdown-divider">
-                </li>
-
-                <li>
-                <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                    <i class="bi bi-gear"></i>
-                    <span>Account Settings</span>
-                </a>
-                </li>
-                <li>
-                <hr class="dropdown-divider">
-                </li>
-
-                <li>
-                <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                    <i class="bi bi-question-circle"></i>
-                    <span>Need Help?</span>
-                </a>
-                </li>
-                <li>
-                <hr class="dropdown-divider">
-                </li>
-
-                <li>
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"> 
-                    <i class="bx bx-power-off me-2"></i>
-                    <span class="align-middle">Log Out</span>
-                    </a>                       
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                    </form>
-                </li>
-
-            </ul><!-- End Profile Dropdown Items -->
-            </li><!-- End Profile Nav -->
-
-        </ul>
-        </nav><!-- End Icons Navigation -->
-
-        </header><!-- End Header -->
+</aside><!-- End Sidebar-->
 
 
 

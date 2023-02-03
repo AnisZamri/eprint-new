@@ -70,14 +70,15 @@ class OrderController extends Controller
   
     public function ViewOrder(){
            
+        $id=Auth::user()->id;
         $orders=Orders::all();
         $orderProducts=OrderProducts::all();
 
-        return view('customers.order.cust_viewOrder',compact('orders','orderProducts'));
+        return view('customers.order.cust_viewOrder',compact('id','orders','orderProducts'));
     
     }
 
-  
+     
     public function CheckoutStore(Request $request){
         if($request->payment_method == 'paypal'){
             return Redirect()->route('paypalCheckout');

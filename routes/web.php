@@ -124,6 +124,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('createOrder', [OrderController::class,'CreateOrder'])->name('createOrder');
     Route::get('/customers/order/order', [OrderController::class,'ViewOrder'])->name('custViewOrder');
+    Route::get('/customers/order/orderTable', [OrderController::class,'ViewOrderTable'])->name('custViewOrderTable');
 
 });
 
