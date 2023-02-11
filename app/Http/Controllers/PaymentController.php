@@ -39,8 +39,7 @@ class PaymentController extends Controller
     public function charge(Request $request)
     {
         if($request->input('submit'))
-        {
-            try {
+        {   try {
                 $response = $this->gateway->purchase(array(
                     'amount' => $request->input('amount'),
                     'currency' => env('PAYPAL_CURRENCY'),
@@ -60,13 +59,6 @@ class PaymentController extends Controller
                 ]);
         
                 $cart = session()->get('cart', []);
-                // echo '<pre>';
-                // print_r($cart);
-                // echo '<pre>';
-                // die();
-        
-                
-        
                 foreach($cart as $key=>$val){
                     OrderProducts::insert
                     ([
@@ -76,9 +68,7 @@ class PaymentController extends Controller
                         'orderProduct' => $val['product_name'],
                         'orderPrice' => $val['price'],
                         'created_at' => Carbon::now()
-                        
-                    ]);
-                  }
+                    ]);}
             
                 if ($response->isRedirect()) {
                     $response->redirect(); // this will automatically forward the customer
