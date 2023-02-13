@@ -2,6 +2,8 @@
 
 @section('content')
 
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8359,6 +8361,14 @@ h1, h2, h3, h4, h5,
 		<div class="container">
     <h4 style="margin-top:-70px" >My Orders</h4>
 
+    @if (session('success'))
+
+             
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>{{session('success')}}</strong> 
+</div>
+
+@endif
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
 					              
@@ -8436,6 +8446,29 @@ h1, h2, h3, h4, h5,
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
+
+  <script>
+    @if (session('success'))
+    var type = "{{  Session::get('alert-type','info') }}"
+    switch(type){
+        case 'info' :
+        toastr.info(" {{  Session::get('message') }}");
+        break;
+
+        case 'success' : 
+        toastr.success(" {{  Session::get('message') }}");
+        break;
+
+        case 'warning' :
+        toastr.warning(" {{  Session::get('message') }}");
+        break;
+
+        case 'error' :
+        toastr.error(" {{  Session::get('message') }}");
+}
+    @endif
+</script>
+    
 
 	</body>
 </html>

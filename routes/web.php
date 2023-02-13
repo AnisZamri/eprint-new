@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('staffs/profile/viewProfile', [StaffController::class, 'StaffViewProfile'])->name('staffViewProfile');
 Route::get('/staffs/profile/editProfile/{id}', [StaffController::class,'StaffEditProfile'])->name('staffEditProfile');
 Route::post('/staffs/profile/updateProfile/{id}', [StaffController::class,'StaffUpdateProfile'])->name('staffUpdateProfile');
+Route::get('/staffs/{id}', [ProfileController::class,'destroyStaff']);
 
 
 Route::get('admin/change/password', [StaffController::class, 'AdminChangePassword'])->name('admin.change.password');
@@ -90,6 +91,8 @@ Route::post('/status/{id}', [OrderController::class,'UpdateStatus'])->name('upda
 Route::get('customers/profile/viewProfile', [CustomersController::class, 'CustViewProfile'])->name('custViewProfile');
 Route::get('/customers/profile/editProfile/{id}', [CustomersController::class,'CustEditProfile'])->name('custEditProfile');
 Route::post('/customers/profile/updateProfile/{id}', [CustomersController::class,'CustUpdateProfile'])->name('custUpdateProfile');
+Route::get('/user/{id}', [ProfileController::class,'destroy']);
+
 
 Route::get('/customers/subproduct/cust_viewSubProduct/{id}', [IndexController::class,'ViewCustSubProduct'])->name('viewCustSubProduct');
 Route::get('/products/subproductsDetails/{id}', [IndexController::class,'CustViewSubProductsDetails'])->name('custViewSubProductDetails');

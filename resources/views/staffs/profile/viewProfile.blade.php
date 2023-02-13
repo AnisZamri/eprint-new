@@ -85,7 +85,7 @@
               <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
             </div>
                   
-            <form id="formAccountDeactivation" onsubmit="return false">
+            <form action="{{ url('/staffs/'.$staffs->id) }}" enctype="multipart/form-data">  
             <div class="form-check mb-3">
               <input
                 class="form-check-input"

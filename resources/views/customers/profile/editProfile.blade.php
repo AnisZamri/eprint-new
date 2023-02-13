@@ -31,7 +31,7 @@
 
                               <label class="col-md-4 col-lg-3 col-form-label">Full Name</label><br>
                               <div  class="col-md-8 col-lg-9">
-                                <input name="custFullName" type="text" class="form-control" id="custFullname" >
+                                <input name="custFullName" type="text" class="form-control" id="custFullname" value="{{$customers->custFullName}}" >
                               </div>
 
                               <label class="col-md-4 col-lg-3 col-form-label">Email</label><br>
@@ -41,12 +41,12 @@
 
                               <label class="col-md-4 col-lg-3 col-form-label">Phone Number</label><br>
                               <div  class="col-md-8 col-lg-9">
-                                <input name="custPhone" type="text" class="form-control" id="custPhone">
+                                <input name="custPhone" type="text" class="form-control" id="custPhone" value="{{$customers->custPhone}}">
                               </div>
 
                               <label class="col-md-4 col-lg-3 col-form-label">Address</label><br>
                               <div  class="col-md-8 col-lg-9">
-                                <input name="custAddress" type="text" class="form-control" id="custAddress">
+                                <input name="custAddress" type="text" class="form-control" id="custAddress" value="{{$customers->custAddress}}">
                               </div>
 
                               </ul>

@@ -126,6 +126,11 @@
                   <label class="form-label" for="password">Confirm Password</label>
                               <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;">
                 </div>
+
+
+                <input type="text" name="custFullName"  id="custFullName" aria-describedby="emailHelp" value="None" hidden>
+                <input type="text" name="custPhone"  id="custPhone" aria-describedby="emailHelp" value="None" hidden>
+                <input type="text" name="custAddress"  id="custAddress" aria-describedby="emailHelp" value="None" hidden>
  
                 <div class="mb-3">
                   <div class="form-check">

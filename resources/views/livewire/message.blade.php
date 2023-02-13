@@ -1,7 +1,8 @@
 <div>
     <div class="row justify-content-center" wire:poll="mountComponent()">
+
         @if(auth()->user()->is_admin == true)
-            <div class="col-md-4" wire:init>
+            <div class="col-md-3" style="margin-top:50px; margin-left:190px" wire:init>
                 <div class="card">
                     <div class="card-header">
                         Users
@@ -27,7 +28,7 @@
                 </div>
             </div>
         @endif
-        <div class="col-md-8">
+        <div class="col-md-7" style="margin-top:50px;margin-left:1px">
             <div class="card">
                 <div class="card-header">
                     @if(isset($clicked_user)) {{ $clicked_user->name }}
@@ -40,6 +41,8 @@
                         Messages
                     @endif
                 </div>
+
+
                     <div class="card-body message-box">
                         @if(!$messages)
                             No messages to show
@@ -47,8 +50,8 @@
                             @if(isset($messages))
                                 @foreach($messages as $message)
                                     <div class="single-message @if($message->user_id !== auth()->id()) received @else sent @endif">
-                                        <p class="font-weight-bolder my-0">{{ $message->user->name }}</p>
-                                        <p class="my-0">{{ $message->message }}</p>
+                                        <p class="font-weight-bolder my-0" style="color:black">{{ $message->user->name }}</p>
+                                        <p class="my-0" style="color:black">{{ $message->message }}</p>
                                         @if (isPhoto($message->file))
                                             <div class="w-100 my-2">
                                                 <img class="img-fluid rounded" loading="lazy" style="height: 250px" src="{{ $message->file }}">

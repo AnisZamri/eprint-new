@@ -25,6 +25,7 @@
                               <li>Username<span style="margin-left:-1000px">{{ Auth::user()->name }}</span></li>
                               <li>Email<span>{{ Auth::user()->email }}</span></li>
 
+
                               @foreach($customers as $customers)
                                   @if($customers->id==Auth::user()->id)
                                       <li>Full Name<span>{{$customers->custFullName}}</span></li>
@@ -60,8 +61,13 @@
                           <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your account?</h6>
                           <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
                         </div>
-                              
-                        <form id="formAccountDeactivation" onsubmit="return false">
+
+
+                       
+
+
+              <form action="{{ url('/user/'.$user->id) }}" enctype="multipart/form-data">  
+
                         <div class="form-check mb-3">
                           <input
                             class="form-check-input"
@@ -73,6 +79,7 @@
                             >I confirm my account deactivation</label
                           >
                         </div>
+
                         <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
                       </form>
                          

@@ -1,5 +1,6 @@
-<div>
-    <div class="row justify-content-center">
+<div >
+    
+    <div class="row justify-content-center" >
         @if(auth()->user()->is_admin == true)
             <div class="col-md-4">
                 <div class="card">
@@ -35,9 +36,9 @@
                 <div class="card-body message-box" wire:poll.10ms="mountComponent()">
                     @if(filled($messages))
                         @foreach($messages as $message)
-                            <div class="single-message @if($message->user_id !== auth()->id()) received @else sent @endif">
-                                <p class="font-weight-bolder my-0">{{ $message->user->name }}</p>
-                                <p class="my-0">{{ $message->message }}</p>
+                            <div class="single-message @if($message->user_id !== auth()->id()) received @else sent @endif" style="color:black">
+                                <p class="font-weight-bolder my-0" style="color:black">{{ $message->user->name }}</p>
+                                <p class="my-0"style="color:black">{{ $message->message }}</p>
                                 @if (isPhoto($message->file))
                                     <div class="w-100 my-2">
                                         <img class="img-fluid rounded" loading="lazy" style="height: 250px" src="{{ $message->file }}">

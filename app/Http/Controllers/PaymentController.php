@@ -112,11 +112,18 @@ class PaymentController extends Controller
                 $payment->currency = env('PAYPAL_CURRENCY');
                 $payment->payment_status = $arr_body['state'];
                 $payment->save();
+
+                $notification = array(
+                    'message' => 'Payment Successfully Updated',
+                    'alert-type' => 'success'
+                );
+        
+                return redirect()->route('custViewOrder')->with('success','Payment Successful');
            
-                return "Payment is successful. Your transaction id is: ". $arr_body['id'];
-            } 
-            
-            else {
+           
+
+                
+            } else {
                 return $response->getMessage();
             }
         } else {

@@ -26,11 +26,11 @@
 }
 .sent {
     margin-left: auto !important;
-    background :#3490dc;
+    background :#b1d3ef;
     color: white!important;
 }
 .sent small {
-    color: white !important;
+    color: rgb(102, 99, 99) !important;
 }
 .link:hover {
     list-style: none !important;
