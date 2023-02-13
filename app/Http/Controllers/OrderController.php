@@ -14,6 +14,7 @@ use App\Models\OrderProducts;
 use Illuminate\Support\Carbon;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Console\Input\Input;
 
 class OrderController extends Controller
 {
@@ -57,7 +58,7 @@ class OrderController extends Controller
                 'subProductId' => $val['id'],
                 'orderQuantity' => $val['quantity'],
                 'orderProduct' => $val['product_name'],
-                'orderPrice' => $val['price'],
+                'orderPrice' => $val['price']* $val['quantity'],
                 'created_at' => Carbon::now()
                 
             ]);
@@ -70,30 +71,62 @@ class OrderController extends Controller
   
     public function ViewOrder(){
            
-        $id=Auth::user()->id;
-        $orders=Orders::all();
-        $orderProducts=OrderProducts::all();
-
-        return view('customers.order.cust_viewOrder',compact('id','orders','orderProducts'));
+        $orders = Orders::where('custId',Auth::id())->orderBy('id','DESC')->get();
+        return view('customers.order.cust_viewOrder',compact('orders'));
     
     }
 
+    public function custViewOrderDetails($id){
+        $orders=Orders::findOrFail($id);      
+        $orderProducts = OrderProducts::select('orderProduct','orderQuantity','orderPrice','sub_products.subProductPrice') 
+        ->where('order_products.orderId',$id) 
+        ->join('sub_products', 'sub_products.id', '=', 'order_products.subProductId')->get();                
+ 
+       return view('customers.order.cust_viewOrderDetails',compact('orders','orderProducts'));
+
+    }
+
      
+    
     public function CheckoutStore(Request $request){
         if($request->payment_method == 'paypal'){
-            return Redirect()->route('paypalCheckout');
+            $request->session()->put('orderEmail',$request->input('orderEmail'));
+            $request->session()->put('orderName',$request->input('orderName'));
+            $request->session()->put('orderPhone',$request->input('orderPhone'));
+            $request->session()->put('orderAddress',$request->input('orderAddress'));
+            
+            return view ('customers.checkout.paypalCreateOrder')
+            ->with('orderEmail', $request->session()->get('orderEmail'))
+            ->with('orderName', $request->session()->get('orderName'))
+            ->with('orderPhone', $request->session()->get('orderPhone'))
+            ->with('orderAddress', $request->session()->get('orderAddress'));
 
         }elseif($request->payment_method == 'cash'){
-            return Redirect()->route('cashCheckout');
+            $request->session()->put('orderEmail',$request->input('orderEmail'));
+            $request->session()->put('orderName',$request->input('orderName'));
+            $request->session()->put('orderPhone',$request->input('orderPhone'));
+            $request->session()->put('orderAddress',$request->input('orderAddress'));
+
+
+            return view ('customers.checkout.cashCheckout')
+            ->with('orderEmail', $request->session()->get('orderEmail'))
+            ->with('orderName', $request->session()->get('orderName'))
+            ->with('orderPhone', $request->session()->get('orderPhone'))
+            ->with('orderAddress', $request->session()->get('orderAddress'));
         }
     }
 
-    public function CashCheckout()
+  
+
+    public function CashCheckout(Request $request)
     {  
         $users=User::all();
         $products=ProductCategory::all();
         $customers=Customers::all();
-        return view ('customers\checkout\cashCheckout',compact('users','products','customers'));
+        $orders=Orders::all();
+
+
+        return view ('customers\checkout\cashCheckout',compact('users','products','customers','orders'));
     }
 
     public function PaypalCheckout()
@@ -101,7 +134,26 @@ class OrderController extends Controller
         $users=User::all();
         $products=ProductCategory::all();
         $customers=Customers::all();
-        return view('customers.checkout.paypalCreateOrder',compact('users','products','customers'));
+        $orders=Orders::all();
+
+        return view('customers.checkout.paypalCreateOrder',compact('users','products','customers','orders'));
+
+    }
+
+    
+    public function show(Request $request)
+    {  
+      
+        return view('customers.checkout.show');
+
+    }
+
+    public function about(Request $request)
+    {  
+      
+        $request->session()->put('name',$request->input('name'));
+
+        return view ('customers.checkout.about')->with('name', $request->session()->get('name'));
 
     }
 
@@ -140,8 +192,7 @@ class OrderController extends Controller
     public function UpdateStatus(Request $request,$id){
      
         Orders::find($id)->update([ 
-        'orderStatus'=>$request->orderStatus,
-    ]);
+        'orderStatus'=>$request->orderStatus,]);
 
         return Redirect()->route('viewOrder');
       

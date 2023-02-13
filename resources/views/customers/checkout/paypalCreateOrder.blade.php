@@ -65,27 +65,29 @@ $customer= App\Models\Customers::all()
                         <div class="row">
                             <div class="col-lg-8 col-md-6 col-sm-6">
                                     <div class="checkout__form__input">
-                                        <input type="hidden" name="orderEmail"  id="orderEmail" aria-describedby="emailHelp" value="{{ Auth::user()->email }}">
+                                    <input type="orderEmail" name="orderEmail"  id="" aria-describedby="emailHelp" value=" {{$orderEmail}}">
                                     </div>
 
-    
+                                    @php
+                  $customers= App\Models\Customers::all()
+                  @endphp
                                     @foreach($customers as $customers)
                                     @if($customers->id==Auth::user()->id)
                                         <div class="col-lg-8 col-md-6 col-sm-6">
                                             <div class="checkout__form__input">
-                                                <input type="hidden" name="orderName"  id="cash" aria-describedby="emailHelp" value="{{$customers->custFullName}}" >
+                                            <input type="" name="orderName"  id="orderName" aria-describedby="emailHelp" value=" {{$orderName}}">
                                             </div>
                                         </div>
                             
                                         <div class="col-lg-8 col-md-6 col-sm-6">
                                             <div class="checkout__form__input">
-                                                <input type="hidden" name="orderPhone"  id="cash" aria-describedby="emailHelp" value="{{$customers->custPhone}}">
+                                            <input type="" name="orderPhone"  id="orderPhone" aria-describedby="emailHelp" value="{{$orderPhone}}">
                                             </div>
                                         </div>
             
                                         <div class="col-lg-12">
                                             <div class="checkout__form__input">
-                                                <input type="hidden" name="orderAddress"  id="cash" aria-describedby="emailHelp" value="{{$customers->custAddress}}">
+                                            <input type="" name="orderAddress"  id="cash" aria-describedby="emailHelp" value="{{$orderAddress}}">
                                             </div>
                                         </div>
 

@@ -114,7 +114,9 @@ class PaymentController extends Controller
                 $payment->save();
            
                 return "Payment is successful. Your transaction id is: ". $arr_body['id'];
-            } else {
+            } 
+            
+            else {
                 return $response->getMessage();
             }
         } else {

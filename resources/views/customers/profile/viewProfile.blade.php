@@ -7,11 +7,11 @@
           <div class="content-wrapper">
             <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container-xxl flex-grow-1 container-p-y" style="margin-top:20px; margin-left:100px; ">
               <h4 class="fw-bold py-3 mb-4"><span style="margin-left:120px; " class="text-muted fw-light">Account Settings /</span> Account</h4>
 
 
-                    <div class="col-lg-8" style="margin-left:110px">
+                    <div class="col-lg-9" style="margin-left:110px">
                       <div class="checkout__order" style="background-color:white">
                         <h5 style="padding-bottom:15px">PROFILE</h5>
                         @php
@@ -49,10 +49,10 @@
                     </div>
             </div>
 
-            <div class="container-xxl flex-grow-1 container-p-y" style="margin-top:20px" >
+            <div class="container-xxl flex-grow-1 container-p-y" style="margin-top:20px; margin-left:100px;" >
 
 
-                    <div class="col-lg-8" style="margin-left:110px">
+                    <div class="col-lg-9" style="margin-left:110px">
                       <div class="checkout__order" style="background-color:white">
                         <h5 style="padding-bottom:15px">Delete Account</h5>
                               

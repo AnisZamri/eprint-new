@@ -20,6 +20,7 @@ class Message extends Component
 
     public function render()
     {
+
         return view('livewire.message', [
             'users' => $this->users,
             'admin' => $this->admin
@@ -60,7 +61,7 @@ class Message extends Component
 
         // Deal with the file if uploaded
         if ($this->file) {
-            $file = $this->file->store('app/livewire-tmp');
+            $file = $this->file->store('public/files');
             $path = url(Storage::url($file));
             $new_message->file = $path;
             $new_message->file_name = $this->file->getClientOriginalName();

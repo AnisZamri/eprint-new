@@ -77,9 +77,10 @@ foreach ($variations as $variation) {
                     <thead>
                     <tr> 
                     <th>No</th>
-					<th>Date</th>
+				          	<th>Date</th>
                   <th>Name</th>
-					<th>Total Price</th>
+				        	<th>Total Price</th>
+                  <th>Payment Method</th>
                   <th>Order Status</th>
                   <th>Action</th>
 
@@ -100,12 +101,31 @@ foreach ($variations as $variation) {
                   <td>{{$orders->created_at}}</td> 
                   <td>{{$orders->orderName}}</td> 
                   <td>RM{{$orders->orderTotalPrice}}</td> 
-                  <td>{{$orders->orderStatus}}</td> 
+                  <td>cash</td> 
 
                   <td>
+                    @if ($orders->orderStatus == 'pending')
+                      <span class="badge bg-secondary">{{ $orders->orderStatus}}</span>
 
+                          @elseif ($orders->orderStatus == 'approved')
+                          <span class="badge bg-primary">{{ $orders->orderStatus}}</span>
 
-                    <a href="{{ route('updateOrderStatus',$orders->id)}}" class="btn btn-info" title="Edit Data"><i class="fa fa-eye"></i> </a>
+                          @elseif ($orders->orderStatus == 'in process')
+                          <span class="badge bg-warning text-dark">{{ $orders->orderStatus}}</span>
+
+                          @elseif ($orders->orderStatus == 'shipped')
+                          <span class="badge bg-info text-dark">{{ $orders->orderStatus}}</span>
+
+                          @elseif ($orders->orderStatus == 'completed')
+                          <span class="badge bg-success">{{ $orders->orderStatus}}</span>
+
+                          @elseif ($orders->orderStatus == 'rejected')
+                          <span class="badge bg-danger">{{ $orders->orderStatus}}</span>
+                        @endif
+                  </td>
+            
+                      <td><a href="{{ route('updateOrderStatus',$orders->id)}}" class="btn btn-secondary" title="Product Status"><i class="fa fa-eye"></i> View </a></td>
+
                  
             
                   @endforeach

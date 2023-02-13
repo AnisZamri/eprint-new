@@ -61,20 +61,7 @@
                                                                 {{$sub}}
                                                         </label>
 
-                                                        <!-- <label for="s-btn">
-                                                            <input type="radio" id="s-btn">
-                                                            s
-                                                        </label>
-
-                                                        <label for="m-btn">
-                                                            <input type="radio" id="m-btn">
-                                                            m
-                                                        </label>
-
-                                                        <label for="l-btn">
-                                                            <input type="radio" id="l-btn">
-                                                            l
-                                                        </label> -->
+                                                   
 
                                                     @endforeach
                                                 </div>
@@ -95,20 +82,7 @@
                                                             {{$sub}}
                                                     </label>
 
-                                                    <!-- <label for="s-btn">
-                                                        <input type="radio" id="s-btn">
-                                                        s
-                                                    </label>
-
-                                                    <label for="m-btn">
-                                                        <input type="radio" id="m-btn">
-                                                        m
-                                                    </label>
-
-                                                    <label for="l-btn">
-                                                        <input type="radio" id="l-btn">
-                                                        l
-                                                    </label> -->
+                                              
                                                     @endforeach
                                                 </div>
                                         </li>

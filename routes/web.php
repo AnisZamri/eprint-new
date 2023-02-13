@@ -106,7 +106,6 @@ Route::group(['middleware' => 'auth'], function () {
     //Cust Order
     Route::get('/products/subproducts/checkout', [CartController::class,'CustCheckout'])->name('custCheckout');     //pergi page isi nama
 
-    Route::post('/products/subproducts/checkoutorder', [CartController::class,'CustCheckoutOrder'])->name('checkoutCreateOrder');      //create order lepas paymetn gi page sec
 
     //Cust Paypal Payment
     Route::get('payment', [PaymentController::class,'index']);
@@ -124,7 +123,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('createOrder', [OrderController::class,'CreateOrder'])->name('createOrder');
     Route::get('/customers/order/order', [OrderController::class,'ViewOrder'])->name('custViewOrder');
-    Route::get('/customers/order/orderTable', [OrderController::class,'ViewOrderTable'])->name('custViewOrderTable');
+    Route::get('/customers/orderDetails/{id}', [OrderController::class,'custViewOrderDetails'])->name('viewOrderDetails');
+
+    Route::get('/show', [OrderController::class,'show'])->name('show');
+    Route::post('/about', [OrderController::class,'about'])->name('about');
+
 
 });
 

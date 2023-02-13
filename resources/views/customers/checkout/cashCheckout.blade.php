@@ -58,6 +58,8 @@ $customer= App\Models\Customers::all()
 @endphp
 <form action="{{ route('createOrder')}}" id="paypal" method="POST" enctype="multipart/form-data"  class="checkout__form">                   
  
+
+
             @csrf
                 <div class="row">
                     <div class="col-lg-12">
@@ -65,27 +67,30 @@ $customer= App\Models\Customers::all()
                         <div class="row">
                             <div class="col-lg-8 col-md-6 col-sm-6">
                                     <div class="checkout__form__input">
-                                        <input type="hidden" name="orderEmail"  id="orderEmail" aria-describedby="emailHelp" value="{{ Auth::user()->email }}">
+                                    <input type="" name="orderEmail"  id="orderEmail" aria-describedby="emailHelp" value=" {{$orderEmail}}">
                                     </div>
 
-    
+                                    @php
+                  $customers= App\Models\Customers::all()
+                  @endphp
+
                                     @foreach($customers as $customers)
                                     @if($customers->id==Auth::user()->id)
                                         <div class="col-lg-8 col-md-6 col-sm-6">
-                                            <div class="checkout__form__input">
-                                                <input type="hidden" name="orderName"  id="cash" aria-describedby="emailHelp" value="{{$customers->custFullName}}" >
+                                            <div class="checkout__form__input"  > 
+                                                <input type="" name="orderName"  id="orderName" aria-describedby="emailHelp" value=" {{$orderName}}">
                                             </div>
                                         </div>
                             
                                         <div class="col-lg-8 col-md-6 col-sm-6">
                                             <div class="checkout__form__input">
-                                                <input type="hidden" name="orderPhone"  id="cash" aria-describedby="emailHelp" value="{{$customers->custPhone}}">
+                                            <input type="" name="orderPhone"  id="orderPhone" aria-describedby="emailHelp" value="{{$orderPhone}}">
                                             </div>
                                         </div>
             
                                         <div class="col-lg-12">
                                             <div class="checkout__form__input">
-                                                <input type="hidden" name="orderAddress"  id="cash" aria-describedby="emailHelp" value="{{$customers->custAddress}}">
+                                                <input type="" name="orderAddress"  id="cash" aria-describedby="emailHelp" value="{{$orderAddress}}">
                                             </div>
                                         </div>
 
@@ -113,6 +118,8 @@ $customer= App\Models\Customers::all()
                      @foreach(session('cart') as $id => $details)
 
                     <li>{{ $details['product_name'] }}<span style="margin-right:30px">RM{{ $details['price'] * $details['quantity'] }}</span></li>
+                    <input type="orderPrice" name="orderPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $details['price'] * $details['quantity'] }}" hidden>
+
 
 
  
@@ -265,6 +272,11 @@ else{
      
     }).render('#paypal-button-container');
   </script>
+
+<script>
+document.getElementById("result").innerHTML=localStorage.getItem("textvalue");
+</script>
+
  
   @endpush
  

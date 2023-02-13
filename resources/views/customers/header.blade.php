@@ -104,6 +104,8 @@ body {
                                     <li><a class="nav-link" href="{{ route('inbox.index') }}">Chat</a></li>
     
                                     <li><a href="{{ route('custViewOrder') }}">Orders</a></li>
+                                    <li><a href="{{ route('show') }}">Test</a></li>
+
 
                                             <li><a href="{{ route('custViewProfile') }}">PROFILE</a></li>
                                             <!-- <li><a href="{{ url('customers/editprofile/')}}">EDIT PROFILE</a></li> -->

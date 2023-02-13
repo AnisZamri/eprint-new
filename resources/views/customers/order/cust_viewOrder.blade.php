@@ -8238,16 +8238,51 @@ h1, h2, h3, h4, h5,
       height: 10px;
       content: '';
       border-radius: 50%; }
-  .table tbody td.status .active {
-    background: #cff6dd;
-    color: #1fa750; }
-    .table tbody td.status .active:after {
-      background: #23bd5a; }
-  .table tbody td.status .waiting {
+
+      .table tbody td.status .pending {
+    background: #d1ccbe;
+    color:  #474545; }
+    .table tbody td.status .pending:after {
+      background:  #474545; }
+
+      .table tbody td.status .approved {
+    background: #62a5c4;
+    color: #ffffff; }
+    .table tbody td.status .approved:after {
+      background: #ffffff; }
+
+      .table tbody td.status .waiting {
     background: #fdf5dd;
     color: #cfa00c; }
     .table tbody td.status .waiting:after {
       background: #f2be1d; }
+
+      .table tbody td.status .shipped {
+    background:       #17c5e9;
+    color: #e4fbfb; }
+    .table tbody td.status .shipped:after {
+      background: #e4fbfb; }
+
+
+
+      
+
+
+      .table tbody td.status .completed {
+    background: #cff6dd;
+    color: #1fa750; }
+    .table tbody td.status .completed:after {
+      background: #23bd5a; }
+
+      .table tbody td.status .rejected {
+    background: #f53636;
+    color: #1fa750; }
+    .table tbody td.status .rejected:after {
+      background: #f53636; }
+
+    
+
+
   .table tbody td .img {
     width: 50px;
     height: 50px;
@@ -8337,11 +8372,9 @@ h1, h2, h3, h4, h5,
 						    <tr>
 						    	<th>No</th>
 						    	<th>Order Date</th>
-						      <th>Product</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-						      <th>Payment Status</th>
-                  <th>Order Status</th>
+						      <th>Price</th>
+                  <th>Payment Method</th>
+						      <th>Order Status</th>
                   <th>View</th>
 
                   
@@ -8352,16 +8385,36 @@ h1, h2, h3, h4, h5,
               @php($i=1)
 
 						  <tbody>
-              @foreach($orderProducts as $orderProducts) 
+              @foreach($orders as $orders) 
+
 						    <tr class="alert" role="alert">
                   <td>{{$i++}}</td> 
-                  <td>{{$orderProducts->created_at}}</td> 
-                  <td>{{$orderProducts->orderProduct}}</td> 
-                  <td>{{$orderProducts->orderQuantity}}</td> 
-                  <td>RM{{$orderProducts->orderPrice}}</td> 
-						      <td class="status"><span class="active">Paid</span></td>
-                  <td class="status"><span class="waiting">Pending</span></td>
-                  <td><a href="" class="btn btn-secondary"><i class="fa fa-eye"></i> </a></td>
+                  <td>{{$orders->created_at}}</td> 
+                  <td>{{$orders->orderTotalPrice}}</td> 
+                  <td>Cash</td>
+                  <td class="status">
+                       @if ($orders->orderStatus == 'pending')
+                      <span class="pending">{{ $orders->orderStatus}}</span>
+
+                        @elseif ($orders->orderStatus == 'approved')
+                          <span class="approved">{{ $orders->orderStatus}}</span>
+
+                          @elseif ($orders->orderStatus == 'in process')
+                          <span class="waiting">{{ $orders->orderStatus}}</span>
+
+                          @elseif ($orders->orderStatus == 'shipped')
+                          <span class="shipped">{{ $orders->orderStatus}}</span>
+                          
+                          
+                          
+                          @elseif ($orders->orderStatus == 'completed')
+                          <span class="completed">{{ $orders->orderStatus}}</span>
+                        @endif
+                  </td>
+                      
+
+                  <td><a href="{{ route('viewOrderDetails',$orders->id)}}" class="btn btn-secondary" title="Product Status"><i class="fa fa-eye"></i> View </a></td>
+
 
 						    </tr>
 
