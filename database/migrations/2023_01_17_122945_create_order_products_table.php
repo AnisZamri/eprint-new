@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('orderProduct');
             $table->string('orderQuantity');
             $table->float('orderPrice',8,2);
+            $table->string('orderDesign');   
+
             $table->timestamps();
         });
     }

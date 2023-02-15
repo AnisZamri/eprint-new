@@ -40,6 +40,10 @@ class OrderController extends Controller
             'orderAddress'=>$request->orderAddress,
             'orderTotalPrice'=>$request->orderTotalPrice,
             'orderStatus'=>$request->orderStatus,
+            'paymentMethod'=>$request->paymentMethod,
+            'trackingNo'=>$request->trackingNo,
+
+
             'created_at'=>Carbon::now()
         ]);
 
@@ -52,6 +56,18 @@ class OrderController extends Controller
         
 
         foreach($cart as $key=>$val){
+         
+            $i = 0;
+            foreach($request->file('orderDesign') as $file){
+                $photo = new Photo;
+                $imageName = time() . $i . '.' . $file->getClientOriginalExtension();
+                $file->move('folderName/', $imageName);
+                $photo->orderDesign = 'folderName/' . $imageName;
+                $photo->status = 1;
+                $photo->save();
+                $i++;
+            }
+           
             OrderProducts::insert
             ([
                 'orderId' => $orderId,
@@ -59,6 +75,7 @@ class OrderController extends Controller
                 'orderQuantity' => $val['quantity'],
                 'orderProduct' => $val['product_name'],
                 'orderPrice' => $val['price']* $val['quantity'],
+                'orderDesign'=>$last_img,
                 'created_at' => Carbon::now()
                 
             ]);
@@ -112,7 +129,9 @@ class OrderController extends Controller
             ->with('orderEmail', $request->session()->get('orderEmail'))
             ->with('orderName', $request->session()->get('orderName'))
             ->with('orderPhone', $request->session()->get('orderPhone'))
-            ->with('orderAddress', $request->session()->get('orderAddress'));
+            ->with('orderAddress', $request->session()->get('orderAddress'))
+            ->with('success','Order Successful');
+
         }
     }
 
@@ -123,7 +142,9 @@ class OrderController extends Controller
         $users=User::all();
         $products=ProductCategory::all();
         $customers=Customers::all();
-        $orders=Orders::all();
+        $orders=Orders::all();      
+          $orderProducts=OrderProducts::all();
+
 
 
         return view ('customers\checkout\cashCheckout',compact('users','products','customers','orders'));

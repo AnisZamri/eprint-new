@@ -68,7 +68,7 @@ $customer= App\Models\Customers::all()
                         <div class="row">
                             <div class="col-lg-8 col-md-6 col-sm-6">
                                     <div class="checkout__form__input">
-                                    <input type="" name="orderEmail"  id="orderEmail" aria-describedby="emailHelp" value=" {{$orderEmail}}">
+                                    <input type="hidden" name="orderEmail"  id="orderEmail" aria-describedby="emailHelp" value=" {{$orderEmail}}">
                                     </div>
 
                                     @php
@@ -79,23 +79,26 @@ $customer= App\Models\Customers::all()
                                     @if($customers->id==Auth::user()->id)
                                         <div class="col-lg-8 col-md-6 col-sm-6">
                                             <div class="checkout__form__input"  > 
-                                                <input type="" name="orderName"  id="orderName" aria-describedby="emailHelp" value=" {{$orderName}}">
+                                                <input type="hidden" name="orderName"  id="orderName" aria-describedby="emailHelp" value=" {{$orderName}}">
+                                                
                                             </div>
                                         </div>
                             
                                         <div class="col-lg-8 col-md-6 col-sm-6">
                                             <div class="checkout__form__input">
-                                            <input type="" name="orderPhone"  id="orderPhone" aria-describedby="emailHelp" value="{{$orderPhone}}">
+                                            <input type="hidden" name="orderPhone"  id="orderPhone" aria-describedby="emailHelp" value="{{$orderPhone}}">
                                             </div>
                                         </div>
             
                                         <div class="col-lg-12">
                                             <div class="checkout__form__input">
-                                                <input type="" name="orderAddress"  id="cash" aria-describedby="emailHelp" value="{{$orderAddress}}">
+                                                <input type="hidden" name="orderAddress"  id="cash" aria-describedby="emailHelp" value="{{$orderAddress}}">
                                             </div>
                                         </div>
+                                        <input type="hidden" name="paymentMethod"  id="paymentMethod" aria-describedby="emailHelp" value="cash" hidden>
 
-                                        <input type="hidden" name="orderStatus"  id="cash" aria-describedby="emailHelp" value="pending" hidden>
+                                        <input type="hidden" name="trackingNo"  id="trackingNo" aria-describedby="emailHelp" value="none" hidden>
+                                         <input type="hidden" name="orderStatus"  id="cash" aria-describedby="emailHelp" value="pending" hidden>
 
                                     @endif
                                     @endforeach
@@ -163,8 +166,14 @@ $customer= App\Models\Customers::all()
                 @if(session('cart'))
                      @foreach(session('cart') as $id => $details)
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
                     <li>{{ $details['product_name'] }}<span style="margin-right:30px">RM{{ $details['price'] * $details['quantity'] }}</span></li>
+=======
+                    <li style="margin-top:10px" >{{ $details['product_name'] }}<span style="margin-right:30px">RM{{ $details['price'] * $details['quantity'] }}</span></li>
+                    <input type="file" name="orderDesign[]"  id="orderDesign" aria-describedby="emailHelp" value="orderDesign[]" multiple>
+
+>>>>>>> Stashed changes
                     <input type="orderPrice" name="orderPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $details['price'] * $details['quantity'] }}" hidden>
 
 =======

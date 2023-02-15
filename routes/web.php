@@ -45,7 +45,9 @@ Route::prefix('staff')->group(function()
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/inbox', [InboxController::class, 'index'])->name('inbox.index');
+    
+    Route::get('/home', [InboxController::class, 'index']);
+    Route::get('/inbox', [InboxController::class, 'index1'])->name('inbox.index');
     Route::get('/inbox/{id}', [InboxController::class, 'show'])->name('inbox.show');
 });
 
@@ -107,7 +109,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //Cust Order
-    Route::get('/products/subproducts/checkout', [CartController::class,'CustCheckout'])->name('custCheckout');     //pergi page isi nama
+    Route::post('/checkout', [CartController::class,'CustCheckout'])->name('custCheckout');     //pergi page isi nama
 
 
     //Cust Paypal Payment

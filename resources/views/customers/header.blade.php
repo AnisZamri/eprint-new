@@ -104,7 +104,6 @@ body {
                                     <li><a class="nav-link" href="{{ route('inbox.index') }}">Chat</a></li>
     
                                     <li><a href="{{ route('custViewOrder') }}">Orders</a></li>
-                                    <li><a href="{{ route('show') }}">Test</a></li>
 
 
                                             <li><a href="{{ route('custViewProfile') }}">PROFILE</a></li>
@@ -191,11 +190,22 @@ body {
     
                                             </div>
 
+                                            
+                                            @if (Route::has('logout'))
+                                    @auth
+                                  
+    
+                                
+    
                                             <li><a class="fa fa-sign-out" style="display: inline;margin-left:10px" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                    
                                         </a></li>
+    
+                                     @endauth
+                                @endif
+                                            
                 
                       </a></li>
                       </div>

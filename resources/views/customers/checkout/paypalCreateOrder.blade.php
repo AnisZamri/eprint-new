@@ -90,6 +90,7 @@ $customer= App\Models\Customers::all()
                                             <input type="hidden" name="orderAddress"  id="cash" aria-describedby="emailHelp" value="{{$orderAddress}}">
                                             </div>
                                         </div>
+                                        <input type="hidden" name="trackingNo"  id="trackingNo" aria-describedby="emailHelp" value="none" hidden>
 
                                         <input type="hidden" name="orderStatus"  id="cash" aria-describedby="emailHelp" value="pending" hidden>
 

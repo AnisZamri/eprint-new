@@ -11,6 +11,17 @@ body {
     background-color: white;
 }
 
+label {
+  background-color: #E8E8E8;
+  color: black;
+  padding: 5px 10px;
+  font-family: sans-serif;
+  cursor: pointer;
+  margin-top: 1rem;
+  
+}
+
+
 </style>
 
 
@@ -33,7 +44,7 @@ body {
  
     
     <!-- Shop Cart Section Begin -->
-    <section class="shop-cart spad">
+    <section class="col-lg-12 shop-cart spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -41,7 +52,7 @@ body {
                         <table>
                             <thead>
                                 <tr>
-                                    <th style="width:20%"></th>
+                                     <th style="width:20%"></th>
                                     <th style="width:15%; text:center">Product</th>
                                     <th style="width:15%">Price</th>
                                     <th class="text-center" style="width:10%">Quantity</th>
@@ -50,7 +61,9 @@ body {
                                     <th></th>
                                 </tr>
                             </thead>
- 
+
+                            <form action="{{ URL::to ('/checkout')}}"  method="POST" enctype="multipart/form-data"  class="checkout__form">                   
+@csrf
                         <tbody id="cartPage">
                             @php $total = 0 @endphp
                                     @if(session('cart'))
@@ -60,39 +73,39 @@ body {
                                             
                                             <tr data-id="{{ $id }}">
 
-                                                <td data-th="Image">
-                                                    <div class="row">
-                                                        <div class=""><img src="{{asset($details['photo'])}}" style="height:80px" /></div>
-                                                       
-                                                    </div>
-                                                </td>
-                                                <td data-th="Product">
-                                                    <div class="row">
-                                                        <div class="col-sm-9">
-                                                            <h6 class="nomargin">{{ $details['product_name'] }}</h6>
+<td data-th="Image">
+    <div class="row">
+        <div class=""><img src="{{asset($details['photo'])}}" style="height:80px" /></div>
+       
+    </div>
+</td>
+<td data-th="Product">
+    <div class="row">
+        <div class="col-sm-9">
+            <h6 class="nomargin">{{ $details['product_name'] }}</h6>
 
 
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td data-th="Price">RM{{ $details['price'] }}</td>
-                                                <input type="text" name="orderPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $details['price'] }}" hidden> 
+        </div>
+    </div>
+</td>
+<td data-th="Price">RM{{ $details['price'] }}</td>
+<input type="text" name="orderPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $details['price'] }}" hidden> 
 
 
-                                                <td data-th="Quantity">
-                                                     <input type="number" name="orderQuantity" value="{{ $details['quantity'] }}" class="form-control quantity cart_update" min="1" />
-                                                </td>
+<td data-th="Quantity">
+     <input type="number" name="orderQuantity" value="{{ $details['quantity'] }}" class="form-control quantity cart_update" min="1" />
+</td>
 
-                                               
 
-                                                <td data-th="Total" class="text-center">RM{{ $details['price'] * $details['quantity'] }}</td>
 
-                                                                              
-                                                <td class="cart_remove" data-th="">
-                                                    <i class="fa fa-times"></i> 
-                                                </td>
-                                             
-                                            </tr>
+<td data-th="Total" class="text-center">RM{{ $details['price'] * $details['quantity'] }}</td>
+
+                              
+<td class="cart_remove" data-th="">
+    <i class="fa fa-times"></i> 
+</td>
+
+</tr>
                                         @endforeach
                                     @endif
                         
@@ -102,15 +115,11 @@ body {
                     <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="cart__btn">
-                        <a href="#">Continue Shopping</a>
+                        <a href="{{ url('/') }}">Continue Shopping</a>
                     </div>
                 </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="cart__btn update__btn">
-                        <a href="#"><span class="icon_loading"></span> Update cart</a>
-                    </div>
-                </div>
+             
             </div>
  
             </div>
@@ -154,7 +163,7 @@ body {
                                 </div>
 
 
-                                <a href="{{ route('custCheckout')}}" style="text-align: center;text-color:white" class="site-btn">Proceed to checkout</a>
+<input type="submit" class="site-btn"  name="submit" value="Proceed to checkout">
 
                             </div>
                         </div>

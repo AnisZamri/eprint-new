@@ -25,7 +25,9 @@ class CartController extends Controller
                 'product_name' => $subproduct->subProductName,
                 'photo' => $subproduct->subProductImage,
                 'price' => $subproduct->subProductPrice,
+                'designUpload' => 1,
                 'quantity' => 1
+                
             ];
         }
 
@@ -44,6 +46,7 @@ class CartController extends Controller
         if($request->id && $request->quantity){
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
+            // $cart[$request->id]["designUpload"] = $request->designUpload;
             session()->put('cart', $cart);
             session()->flash('success', 'Cart successfully updated!');
         }

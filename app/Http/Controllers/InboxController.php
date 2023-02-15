@@ -10,7 +10,14 @@ use \App\Models\Message;
 class InboxController extends Controller
 {
 
+
     public function index() {
+       
+
+        return view('customers.index');
+    }
+
+    public function index1() {
         // Show just the users and not the admins as well
         $users = User::where('is_admin', false)->orderBy('id', 'DESC')->get();
 

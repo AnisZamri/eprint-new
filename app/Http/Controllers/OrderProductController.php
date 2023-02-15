@@ -13,7 +13,8 @@ class OrderProductController extends Controller
             'subProductId'=>$request->subProductId,
             'orderQuantity'=>$request->orderQuantity,
             'orderPrice'=>$request->orderPrice,
-    
+            'orderDesign'=>$request->orderDesign,
+   
             'created_at'=>Carbon::now()
         ]);
 

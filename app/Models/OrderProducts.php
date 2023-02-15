@@ -17,5 +17,6 @@ class OrderProducts extends Model
         'orderProduct',
         'orderQuantity',
         'orderPrice',
+        'orderDesign',
     ];
 }

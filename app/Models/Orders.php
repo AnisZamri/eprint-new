@@ -18,6 +18,10 @@ class Orders extends Model
         'orderAddress',
         'orderTotalPrice',
         'orderStatus',
+        'paymentMethod',
+        'trackingNo',
+
+
       
     ];
 }

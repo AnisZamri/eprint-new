@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('orderEmail');        
             $table->string('orderAddress');
             $table->float('orderTotalPrice',8,2);
-            $table->string('orderStatus');
-       
+            $table->string('orderStatus');     
+            $table->string('paymentMethod');  
+            $table->string('trackingNo');   
 
             $table->timestamps();
         });
