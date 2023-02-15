@@ -59,7 +59,10 @@ class PaymentController extends Controller
                 ]);
         
                 $cart = session()->get('cart', []);
-                foreach($cart as $key=>$val){
+
+
+                foreach($cart as $key=>$val)
+                {
                     OrderProducts::insert
                     ([
                         'orderId' => $orderId,
@@ -68,15 +71,26 @@ class PaymentController extends Controller
                         'orderProduct' => $val['product_name'],
                         'orderPrice' => $val['price'],
                         'created_at' => Carbon::now()
-                    ]);}
+                    ]);
+                }
+                        
+                
             
-                if ($response->isRedirect()) {
+                if ($response->isRedirect())
+                {
                     $response->redirect(); // this will automatically forward the customer
-                } else {
+                } 
+                
+                else 
+                {
                     // not successful
                     return $response->getMessage();
                 }
-            } catch(Exception $e) {
+            } 
+            
+            catch(Exception $e)
+            
+            {
                 return $e->getMessage();
             }
         }
@@ -123,6 +137,7 @@ class PaymentController extends Controller
            
 
                 
+
             } else {
                 return $response->getMessage();
             }

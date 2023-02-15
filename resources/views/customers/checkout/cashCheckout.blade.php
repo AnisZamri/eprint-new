@@ -40,7 +40,9 @@
                     </div>
                 </div>
             </div>
-        </div>z
+        </div>
+
+        </div>
     </div>
     <!-- Breadcrumb End -->
  
@@ -56,7 +58,7 @@
             @php
 $customer= App\Models\Customers::all()
 @endphp
-<<<<<<< HEAD
+
 <form action="{{ route('createOrder')}}" id="paypal" method="POST" enctype="multipart/form-data"  class="checkout__form">                   
  
 
@@ -104,7 +106,7 @@ $customer= App\Models\Customers::all()
                                     @endforeach
                             </div>
                         </div>
-=======
+
             <form action="{{ route('createOrder')}}" method="POST" enctype="multipart/form-data"  class="checkout__form">
  
             @csrf
@@ -140,45 +142,43 @@ $customer= App\Models\Customers::all()
  
                     </div>
                 </div>
->>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
+
  
                 <div class="row">
 
 
-<<<<<<< HEAD
+
 <div class="col-lg-7">
-=======
+
 <div class="col-lg-4">
->>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
+
+
+<div class="col-lg-4">
     <div class="checkout__order" style="background:white">
         <h5>Your order</h5>
         <div class="checkout__order__product">
             <ul>
                 <li>
                     <span class="top__text">Product</span>
-<<<<<<< HEAD
+
                     <span style="margin-right:30px" class="top__text__right">Total</span>
-=======
+
                     <span class="top__text__right">Total</span>
->>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
+                    <span class="top__text__right">Total</span>
                 </li>
 
                 @if(session('cart'))
                      @foreach(session('cart') as $id => $details)
 
-<<<<<<< Updated upstream
-<<<<<<< HEAD
+
                     <li>{{ $details['product_name'] }}<span style="margin-right:30px">RM{{ $details['price'] * $details['quantity'] }}</span></li>
-=======
+
                     <li style="margin-top:10px" >{{ $details['product_name'] }}<span style="margin-right:30px">RM{{ $details['price'] * $details['quantity'] }}</span></li>
                     <input type="file" name="orderDesign[]"  id="orderDesign" aria-describedby="emailHelp" value="orderDesign[]" multiple>
 
->>>>>>> Stashed changes
                     <input type="orderPrice" name="orderPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $details['price'] * $details['quantity'] }}" hidden>
 
-=======
                     <li>{{ $details['product_name'] }}<span>RM{{ $details['price'] * $details['quantity'] }}</span></li>
->>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
 
 
  
@@ -198,18 +198,17 @@ $customer= App\Models\Customers::all()
 
                     @php $total += $details['price'] * $details['quantity'] @endphp
                 @endforeach
-             
-<<<<<<< HEAD
+
                 <li>Subtotal <span style="margin-right:30px">RM{{ $total }}</span></li>
                 <input form="paypal" type="text" name="amount"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
              
                 <li>Total <span style="margin-right:30px">RM{{ $total }}</span></li>
-=======
+
                 <li>Subtotal <span>RM{{ $total }}</span></li>
                 <input form="paypal" type="text" name="amount"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
              
                 <li>Total <span>RM{{ $total }}</span></li>
->>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
+
                 <input type="orderTotalPrice" name="orderTotalPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
      
             </ul>
@@ -219,11 +218,9 @@ $customer= App\Models\Customers::all()
 </div>
 
 
-<<<<<<< HEAD
 <div class="col-lg-4">
-=======
 <div class="col-lg-5">
->>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
+<div class="col-lg-5">
     <div class="checkout__order" style="background:white">
         <h5>Payment method</h5>
              
@@ -239,26 +236,22 @@ $customer= App\Models\Customers::all()
    
     <ul>
                 <li><br>
-<<<<<<< HEAD
+
                  
                 <span class="top__text">Please pay within 3 days after place your order</span><br><br>
                     <span style="margin-top:10px" class="top__text">Location: </span>
                     <span class="top__text"> Abagus Printing, Jalan 1/64, 51200 Wilayah Persekutuan Kuala Lumpur</span>
-=======
+
                     <span class="top__text">Please pay within 3 days after place your order</span><br><br>
                     <span style="margin-top:10px" class="top__text">Location: </span>
                     <span class="top__text"> Abagus Printing, Jalan 1/64, 51200 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</span>
 
->>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
 
 
 
                 </li>
 
-<<<<<<< HEAD
-=======
-               
->>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
+
                 <br><button type="submit" class="site-btn">Place order</button>
 
             </ul>
@@ -353,14 +346,12 @@ else{
      
     }).render('#paypal-button-container');
   </script>
-<<<<<<< HEAD
 
 <script>
 document.getElementById("result").innerHTML=localStorage.getItem("textvalue");
 </script>
 
-=======
->>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
+
  
   @endpush
  

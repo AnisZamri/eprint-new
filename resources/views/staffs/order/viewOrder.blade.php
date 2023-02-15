@@ -81,6 +81,7 @@ foreach ($variations as $variation) {
                   <th>Name</th>
 				        	<th>Total Price</th>
                   <th>Payment Method</th>
+
                   <th>Order Status</th>
                   <th>Action</th>
 
@@ -125,6 +126,7 @@ foreach ($variations as $variation) {
                   </td>
             
                       <td><a href="{{ route('updateOrderStatus',$orders->id)}}" class="btn btn-secondary" title="Product Status"><i class="fa fa-eye"></i> View </a></td>
+
 
                  
             

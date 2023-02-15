@@ -112,6 +112,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/checkout', [CartController::class,'CustCheckout'])->name('custCheckout');     //pergi page isi nama
 
 
+   
+
     //Cust Paypal Payment
     Route::get('payment', [PaymentController::class,'index']);
     Route::post('charge', [PaymentController::class,'charge'])->name('charge');

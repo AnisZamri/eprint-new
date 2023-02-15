@@ -74,10 +74,9 @@ class CartController extends Controller
         $orders=Orders::all();
 
         return view ('customers\checkout\checkout',compact('users','customers','products','orders'));
-    }
 
     
-   
+    }
   
 
 }

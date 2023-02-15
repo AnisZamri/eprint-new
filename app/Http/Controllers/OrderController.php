@@ -136,6 +136,36 @@ class OrderController extends Controller
     }
 
   
+    public function CheckoutStore(Request $request){
+        if($request->payment_method == 'paypal'){
+            return Redirect()->route('paypalCheckout');
+
+        }elseif($request->payment_method == 'cash'){
+            return Redirect()->route('cashCheckout');
+        }
+    }
+
+    public function CashCheckout()
+    {  
+        $users=User::all();
+        $products=ProductCategory::all();
+        $customers=Customers::all();
+        return view ('customers\checkout\cashCheckout',compact('users','products','customers'));
+    }
+
+    public function PaypalCheckout()
+    {  
+        $users=User::all();
+        $products=ProductCategory::all();
+        $customers=Customers::all();
+        return view('customers.checkout.paypalCreateOrder',compact('users','products','customers'));
+
+    }
+
+
+
+
+    /////////////////////////////staff////////////////////////////////
 
     public function CashCheckout(Request $request)
     {  
@@ -213,7 +243,8 @@ class OrderController extends Controller
     public function UpdateStatus(Request $request,$id){
      
         Orders::find($id)->update([ 
-        'orderStatus'=>$request->orderStatus,]);
+        'orderStatus'=>$request->orderStatus]);
+
 
         return Redirect()->route('viewOrder');
       

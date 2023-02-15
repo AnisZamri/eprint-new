@@ -57,6 +57,17 @@ $customer= App\Models\Customers::all()
                 <div class="col-lg-8">
                 <h5>Billing detail</h5>
 
+            @php
+$customer= App\Models\Customers::all()
+@endphp     
+
+
+            <!-- <form action="{{ route('createOrder')}}" method="POST" id="cash" enctype="multipart/form-data"  class="checkout__form"></form> -->
+
+<form action="{{ route('checkoutStore')}}" id="paypal" method="POST" enctype="multipart/form-data"  class="checkout__form">                   
+
+
+            @csrf
                 <div class="row">
  
                        
@@ -77,6 +88,34 @@ $customer= App\Models\Customers::all()
              <p><b>Full Name <span></span></b></p>
              <input type="text" name="orderName"  id="orderName" aria-describedby="emailHelp" value="{{$customers->custFullName}}">
              <input type="hidden" name="_token" value="{{csrf_token() }}" >
+                        
+             @foreach($customers as $customers)
+                                  @if($customers->id==Auth::user()->id)
+                            <div class="col-lg-8 col-md-6 col-sm-6">
+                                <div class="checkout__form__input">
+                                    <p><b>Full Name <span></span></b></p>
+                                    <input type="text" name="orderName"  id="cash" aria-describedby="emailHelp" value="{{$customers->custFullName}}" >
+                                 
+                                </div>
+                            </div>
+                           
+                            <div class="col-lg-8 col-md-6 col-sm-6">
+                                <div class="checkout__form__input">
+                                <p><b>Phone Number <span></span></b></p>
+                                    <input type="text" name="orderPhone"  id="cash" aria-describedby="emailHelp" value="{{$customers->custPhone}}">
+ 
+                                </div>
+                            </div>
+ 
+                         
+                            <div class="col-lg-12">
+                                <div class="checkout__form__input">
+                                <p><b>Address <span></span></b></p>
+                                <input type="text" name="orderAddress"  id="cash" aria-describedby="emailHelp" value="{{$customers->custAddress}}">
+ 
+                                </div>
+                               
+                            </div>
 
           
          </div>
@@ -149,15 +188,12 @@ $customer= App\Models\Customers::all()
                                     
                                         <li>Subtotal <span>RM{{ $total }}</span></li>
                                         <li>Total <span>RM{{ $total }}</span></li>
-<<<<<<< Updated upstream
                                         <input type="orderTotalPrice" name="orderTotalPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
 
                                
-zz                                    </ul>
-=======
+                                   </ul>
                                     
                                     </ul>
->>>>>>> Stashed changes
                                 </div>
 
                                 <h5 class="panel-title mt-20">Select Payment Method: </h5>
@@ -188,6 +224,15 @@ zz                                    </ul>
 
                                 <br><input type="submit" class="site-btn"  name="submit" value="Proceed to checkout">
 
+
+ 
+ 
+ 
+ 
+       
+                             
+                                   
+                            </div>
                             </div>
                         </div>
 

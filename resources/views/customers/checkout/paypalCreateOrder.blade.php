@@ -98,6 +98,7 @@ $customer= App\Models\Customers::all()
                                     @endforeach
                             </div>
                         </div>
+
  
                 <div class="row">
 
@@ -110,12 +111,15 @@ $customer= App\Models\Customers::all()
                 <li>
                     <span class="top__text">Product</span>
                     <span style="margin-right:30px" class="top__text__right">Total</span>
+
+                    <span class="top__text__right">Total</span>
                 </li>
 
                 @if(session('cart'))
                      @foreach(session('cart') as $id => $details)
 
                     <li>{{ $details['product_name'] }}<span style="margin-right:30px">RM{{ $details['price'] * $details['quantity'] }}</span></li>
+                    <li>{{ $details['product_name'] }}<span>RM{{ $details['price'] * $details['quantity'] }}</span></li>
 
 
  
@@ -140,6 +144,10 @@ $customer= App\Models\Customers::all()
                 <input form="paypal" type="text" name="amount"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
              
                 <li>Total <span style="margin-right:30px">RM{{ $total }}</span></li>
+                <li>Subtotal <span>RM{{ $total }}</span></li>
+                <input form="paypal" type="text" name="amount"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
+             
+                <li>Total <span>RM{{ $total }}</span></li>
                 <input type="orderTotalPrice" name="orderTotalPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
      
             </ul>
@@ -149,7 +157,7 @@ $customer= App\Models\Customers::all()
 </div>
 
 
-<div class="col-lg-4">
+<div class="col-lg-5">
     <div class="checkout__order" style="background:white">
         <h5>Payment method</h5>
              
@@ -158,6 +166,7 @@ $customer= App\Models\Customers::all()
                 <div class="card-header" id="#payment-2" style="height:100px">
                     <h5 class="panel-title">
                         <label value="paypal" name="payment_method"for="html">Paypal</label><br><br>
+                        <label value="cash" name="payment_method"for="html">Paypal</label><br><br>
                         <img src="{{asset('staff/assets/img/paypal.png')}}"  style="width:90px;height:40px; margin-top:-40px; margin-left:-15px;; ">
                     </h5>
                 </div>
