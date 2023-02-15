@@ -90,6 +90,9 @@ $customer= App\Models\Customers::all()
                                             <input type="hidden" name="orderAddress"  id="cash" aria-describedby="emailHelp" value="{{$orderAddress}}">
                                             </div>
                                         </div>
+
+                                        <input type="hidden" name="paymentMethod"  id="paymentMethod" aria-describedby="emailHelp" value="paypal" hidden>
+
                                         <input type="hidden" name="trackingNo"  id="trackingNo" aria-describedby="emailHelp" value="none" hidden>
 
                                         <input type="hidden" name="orderStatus"  id="cash" aria-describedby="emailHelp" value="pending" hidden>
@@ -112,14 +115,13 @@ $customer= App\Models\Customers::all()
                     <span class="top__text">Product</span>
                     <span style="margin-right:30px" class="top__text__right">Total</span>
 
-                    <span class="top__text__right">Total</span>
                 </li>
 
                 @if(session('cart'))
                      @foreach(session('cart') as $id => $details)
 
                     <li>{{ $details['product_name'] }}<span style="margin-right:30px">RM{{ $details['price'] * $details['quantity'] }}</span></li>
-                    <li>{{ $details['product_name'] }}<span>RM{{ $details['price'] * $details['quantity'] }}</span></li>
+                    <input type="file" name="orderDesign"  id="orderDesign" aria-describedby="emailHelp" value="orderDesign" multiple>
 
 
  
@@ -144,11 +146,8 @@ $customer= App\Models\Customers::all()
                 <input form="paypal" type="text" name="amount"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
              
                 <li>Total <span style="margin-right:30px">RM{{ $total }}</span></li>
-                <li>Subtotal <span>RM{{ $total }}</span></li>
-                <input form="paypal" type="text" name="amount"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
-             
-                <li>Total <span>RM{{ $total }}</span></li>
                 <input type="orderTotalPrice" name="orderTotalPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
+
      
             </ul>
         </div>
@@ -166,7 +165,6 @@ $customer= App\Models\Customers::all()
                 <div class="card-header" id="#payment-2" style="height:100px">
                     <h5 class="panel-title">
                         <label value="paypal" name="payment_method"for="html">Paypal</label><br><br>
-                        <label value="cash" name="payment_method"for="html">Paypal</label><br><br>
                         <img src="{{asset('staff/assets/img/paypal.png')}}"  style="width:90px;height:40px; margin-top:-40px; margin-left:-15px;; ">
                     </h5>
                 </div>

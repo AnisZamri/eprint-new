@@ -83,69 +83,33 @@ $customer= App\Models\Customers::all()
 
      @foreach($customers as $customers)
            @if($customers->id==Auth::user()->id)
-     <div class="col-lg-8 col-md-6 col-sm-6">
-         <div class="checkout__form__input">
-             <p><b>Full Name <span></span></b></p>
-             <input type="text" name="orderName"  id="orderName" aria-describedby="emailHelp" value="{{$customers->custFullName}}">
-             <input type="hidden" name="_token" value="{{csrf_token() }}" >
-                        
-             @foreach($customers as $customers)
-                                  @if($customers->id==Auth::user()->id)
-                            <div class="col-lg-8 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p><b>Full Name <span></span></b></p>
-                                    <input type="text" name="orderName"  id="cash" aria-describedby="emailHelp" value="{{$customers->custFullName}}" >
-                                 
-                                </div>
-                            </div>
-                           
-                            <div class="col-lg-8 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                <p><b>Phone Number <span></span></b></p>
-                                    <input type="text" name="orderPhone"  id="cash" aria-describedby="emailHelp" value="{{$customers->custPhone}}">
- 
-                                </div>
-                            </div>
- 
-                         
-                            <div class="col-lg-12">
-                                <div class="checkout__form__input">
-                                <p><b>Address <span></span></b></p>
-                                <input type="text" name="orderAddress"  id="cash" aria-describedby="emailHelp" value="{{$customers->custAddress}}">
- 
-                                </div>
-                               
-                            </div>
+                <div class="col-lg-8 col-md-6 col-sm-6">
+                    <div class="checkout__form__input">
+                        <p><b>Full Name <span></span></b></p>
+                                <input type="text" name="orderName"  id="orderName" aria-describedby="emailHelp" value="{{$customers->custFullName}}">
+                                <input type="hidden" name="_token" value="{{csrf_token() }}" >
+                    </div>
+                </div>
+                
 
-          
-         </div>
-     </div>
-    
-
-     <div class="col-lg-8 col-md-6 col-sm-6">
-         <div class="checkout__form__input">
-         <p><b>Phone Number <span></span></b></p>
-             <input type="text" name="orderPhone"  id="orderPhone" aria-describedby="emailHelp" value="{{$customers->custPhone}}">
-             <input type="hidden" name="_token" value="{{csrf_token() }}" >
-
-
-         </div>
-     </div>
+                <div class="col-lg-8 col-md-6 col-sm-6">
+                    <div class="checkout__form__input">
+                    <p><b>Phone Number <span></span></b></p>
+                        <input type="text" name="orderPhone"  id="orderPhone" aria-describedby="emailHelp" value="{{$customers->custPhone}}">
+                        <input type="hidden" name="_token" value="{{csrf_token() }}" >
+                    </div>
+                </div>
 
   
-     <div class="col-lg-12">
-         <div class="checkout__form__input">
-         <p><b>Address <span></span></b></p>
-         <input type="text" name="orderAddress"  id="orderAddress" aria-describedby="emailHelp"  value="{{$customers->custAddress}}">
-         <input type="hidden" name="_token" value="{{csrf_token() }}" >
+                <div class="col-lg-12">
+                    <div class="checkout__form__input">
+                        <p><b>Address <span></span></b></p>
+                        <input type="text" name="orderAddress"  id="orderAddress" aria-describedby="emailHelp"  value="{{$customers->custAddress}}">
+                        <input type="hidden" name="_token" value="{{csrf_token() }}" >
+                    </div>
+                </div>
 
-
-
-         </div>
-        
-     </div>
-
-     <input type="text" name="orderStatus"  id="orderStatus" aria-describedby="emailHelp" value="pending" hidden>
+                <input type="text" name="orderStatus"  id="orderStatus" aria-describedby="emailHelp" value="pending" hidden>
 
 
      @endif

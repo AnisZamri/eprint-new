@@ -8401,7 +8401,7 @@ h1, h2, h3, h4, h5,
                   <td>{{$i++}}</td> 
                   <td>{{$orders->created_at}}</td> 
                   <td>{{$orders->orderTotalPrice}}</td> 
-                  <td>Cash</td>
+                  <td>{{$orders->paymentMethod}}</td> 
                   <td class="status">
                        @if ($orders->orderStatus == 'pending')
                       <span class="pending">{{ $orders->orderStatus}}</span>

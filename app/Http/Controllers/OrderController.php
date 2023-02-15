@@ -57,16 +57,15 @@ class OrderController extends Controller
 
         foreach($cart as $key=>$val){
          
-            $i = 0;
-            foreach($request->file('orderDesign') as $file){
-                $photo = new Photo;
-                $imageName = time() . $i . '.' . $file->getClientOriginalExtension();
-                $file->move('folderName/', $imageName);
-                $photo->orderDesign = 'folderName/' . $imageName;
-                $photo->status = 1;
-                $photo->save();
-                $i++;
-            }
+            
+            $orderDesign=$request->file('orderDesign');
+
+            $name_gen=hexdec(uniqid());
+            $img_ext=strtolower($orderDesign->getClientOriginalExtension());
+            $img_name=$name_gen.'.'.$img_ext;
+            $up_location='image/products/';
+            $last_img=$up_location.$img_name;
+            $orderDesign->move($up_location,$img_name);
            
             OrderProducts::insert
             ([
@@ -135,38 +134,6 @@ class OrderController extends Controller
         }
     }
 
-  
-    public function CheckoutStore(Request $request){
-        if($request->payment_method == 'paypal'){
-            return Redirect()->route('paypalCheckout');
-
-        }elseif($request->payment_method == 'cash'){
-            return Redirect()->route('cashCheckout');
-        }
-    }
-
-    public function CashCheckout()
-    {  
-        $users=User::all();
-        $products=ProductCategory::all();
-        $customers=Customers::all();
-        return view ('customers\checkout\cashCheckout',compact('users','products','customers'));
-    }
-
-    public function PaypalCheckout()
-    {  
-        $users=User::all();
-        $products=ProductCategory::all();
-        $customers=Customers::all();
-        return view('customers.checkout.paypalCreateOrder',compact('users','products','customers'));
-
-    }
-
-
-
-
-    /////////////////////////////staff////////////////////////////////
-
     public function CashCheckout(Request $request)
     {  
         $users=User::all();
@@ -177,7 +144,7 @@ class OrderController extends Controller
 
 
 
-        return view ('customers\checkout\cashCheckout',compact('users','products','customers','orders'));
+        return view ('customers\checkout\cashCheckout',compact('users','products','customers','orders','orderProducts'));
     }
 
     public function PaypalCheckout()

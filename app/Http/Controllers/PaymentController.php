@@ -55,6 +55,8 @@ class PaymentController extends Controller
                     'orderAddress'=>$request->orderAddress,
                     'orderTotalPrice'=>$request->orderTotalPrice,
                     'orderStatus'=>$request->orderStatus,
+                    'paymentMethod'=>$request->paymentMethod,
+                    'trackingNo'=>$request->trackingNo,
                     'created_at'=>Carbon::now()
                 ]);
         
@@ -63,6 +65,16 @@ class PaymentController extends Controller
 
                 foreach($cart as $key=>$val)
                 {
+                    $orderDesign=$request->file('orderDesign');
+
+                    $name_gen=hexdec(uniqid());
+                    $img_ext=strtolower($orderDesign->getClientOriginalExtension());
+                    $img_name=$name_gen.'.'.$img_ext;
+                    $up_location='image/products/';
+                    $last_img=$up_location.$img_name;
+                    $orderDesign->move($up_location,$img_name);
+                   
+                   
                     OrderProducts::insert
                     ([
                         'orderId' => $orderId,
@@ -70,6 +82,8 @@ class PaymentController extends Controller
                         'orderQuantity' => $val['quantity'],
                         'orderProduct' => $val['product_name'],
                         'orderPrice' => $val['price'],
+                        'orderDesign'=>$last_img,
+
                         'created_at' => Carbon::now()
                     ]);
                 }
