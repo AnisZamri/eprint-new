@@ -1,4 +1,4 @@
-@extends('staffs.staffMaster')
+z@extends('staffs.staffMaster')
 
 @section('content')
 

@@ -176,7 +176,7 @@ $customer= App\Models\Customers::all()
                                         <input type="orderTotalPrice" name="orderTotalPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
 
                                
-                                    </ul>
+zz                                    </ul>
                                 </div>
 
                                 <h5 class="panel-title mt-20">Select Payment Method: </h5>

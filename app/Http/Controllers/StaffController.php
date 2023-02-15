@@ -23,8 +23,10 @@ class StaffController extends Controller
 
 
     public function StaffEditProfile($id){
-        $user=User::findOrFail($id);
-        return view ('staffs\profile\editProfile',compact('user'));
+        $user=User::findOrFail($id);   
+        $staff=Staffs::findOrFail($id);   
+
+        return view ('staffs\profile\editProfile',compact('user','staff'));
     }
 
     public function StaffUpdateProfile(Request $request, $id){
@@ -36,8 +38,7 @@ class StaffController extends Controller
             'created_at'=>Carbon::now()
             ]);
 
-        Staffs::insert([
-            'id'=>Auth::user()->id,
+        Staffs::find($id)->update([
             'staffFullName'=>$request->staffFullName,
             'staffPhone'=>$request->staffPhone,
             'created_at' => Carbon::now()

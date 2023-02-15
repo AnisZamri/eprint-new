@@ -39,7 +39,7 @@
                     <div class="row mb-3">
                       <label class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="staffFullName" type="text" class="form-control" id="staffFullName" >
+                        <input name="staffFullName" type="text" class="form-control" id="staffFullName" value="{{$staff->staffFullName}}">
                       </div>
                     </div>
 
@@ -53,7 +53,7 @@
                     <div class="row mb-3">
                       <label class="col-md-4 col-lg-3 col-form-label">Phone Number</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="staffPhone" type="staffPhone" class="form-control" id="staffPhone" value="">
+                        <input name="staffPhone" type="staffPhone" class="form-control" id="staffPhone" value="{{$staff->staffPhone}}">
                       </div>
                     </div>
                   

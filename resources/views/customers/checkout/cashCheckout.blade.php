@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>z
     </div>
     <!-- Breadcrumb End -->
  
@@ -56,6 +56,7 @@
             @php
 $customer= App\Models\Customers::all()
 @endphp
+<<<<<<< HEAD
 <form action="{{ route('createOrder')}}" id="paypal" method="POST" enctype="multipart/form-data"  class="checkout__form">                   
  
 
@@ -100,26 +101,75 @@ $customer= App\Models\Customers::all()
                                     @endforeach
                             </div>
                         </div>
+=======
+            <form action="{{ route('createOrder')}}" method="POST" enctype="multipart/form-data"  class="checkout__form">
+ 
+            @csrf
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h5>Billing detail</h5>
+                        <div class="row">
+ 
+                        @foreach($customers as $customers)
+                                  @if($customers->id==Auth::user()->id)
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                              
+                                    <input type="hidden" name="orderName"  id="orderName" aria-describedby="emailHelp" value="{{$customers->custFullName}}" >
+                                 
+                          
+                                    <input type="hidden" name="orderPhone"  id="orderPhone" aria-describedby="emailHelp" value="{{$customers->custPhone}}">
+ 
+                                    <input type="hidden" name="orderEmail"  id="orderEmail" aria-describedby="emailHelp" value="{{ Auth::user()->email }}">
+ 
+                            </div>
+                         
+                                <input type="hidden" name="orderAddress"  id="orderAddress" aria-describedby="emailHelp" value="{{$customers->custAddress}}">
+ 
+                            
+ 
+                            <input type="hidden" name="orderStatus"  id="exampleInputEmail1" aria-describedby="emailHelp" value="pending" hidden>
+ 
+                                               
+                            @endif
+                              @endforeach
+ 
+                       
+ 
+                    </div>
+                </div>
+>>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
  
                 <div class="row">
 
 
+<<<<<<< HEAD
 <div class="col-lg-7">
+=======
+<div class="col-lg-4">
+>>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
     <div class="checkout__order" style="background:white">
         <h5>Your order</h5>
         <div class="checkout__order__product">
             <ul>
                 <li>
                     <span class="top__text">Product</span>
+<<<<<<< HEAD
                     <span style="margin-right:30px" class="top__text__right">Total</span>
+=======
+                    <span class="top__text__right">Total</span>
+>>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
                 </li>
 
                 @if(session('cart'))
                      @foreach(session('cart') as $id => $details)
 
+<<<<<<< HEAD
                     <li>{{ $details['product_name'] }}<span style="margin-right:30px">RM{{ $details['price'] * $details['quantity'] }}</span></li>
                     <input type="orderPrice" name="orderPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $details['price'] * $details['quantity'] }}" hidden>
 
+=======
+                    <li>{{ $details['product_name'] }}<span>RM{{ $details['price'] * $details['quantity'] }}</span></li>
+>>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
 
 
  
@@ -140,10 +190,17 @@ $customer= App\Models\Customers::all()
                     @php $total += $details['price'] * $details['quantity'] @endphp
                 @endforeach
              
+<<<<<<< HEAD
                 <li>Subtotal <span style="margin-right:30px">RM{{ $total }}</span></li>
                 <input form="paypal" type="text" name="amount"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
              
                 <li>Total <span style="margin-right:30px">RM{{ $total }}</span></li>
+=======
+                <li>Subtotal <span>RM{{ $total }}</span></li>
+                <input form="paypal" type="text" name="amount"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
+             
+                <li>Total <span>RM{{ $total }}</span></li>
+>>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
                 <input type="orderTotalPrice" name="orderTotalPrice"  id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $total }}" hidden>
      
             </ul>
@@ -153,7 +210,11 @@ $customer= App\Models\Customers::all()
 </div>
 
 
+<<<<<<< HEAD
 <div class="col-lg-4">
+=======
+<div class="col-lg-5">
+>>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
     <div class="checkout__order" style="background:white">
         <h5>Payment method</h5>
              
@@ -169,15 +230,26 @@ $customer= App\Models\Customers::all()
    
     <ul>
                 <li><br>
+<<<<<<< HEAD
                  
                 <span class="top__text">Please pay within 3 days after place your order</span><br><br>
                     <span style="margin-top:10px" class="top__text">Location: </span>
                     <span class="top__text"> Abagus Printing, Jalan 1/64, 51200 Wilayah Persekutuan Kuala Lumpur</span>
+=======
+                    <span class="top__text">Please pay within 3 days after place your order</span><br><br>
+                    <span style="margin-top:10px" class="top__text">Location: </span>
+                    <span class="top__text"> Abagus Printing, Jalan 1/64, 51200 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</span>
+
+>>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
 
 
 
                 </li>
 
+<<<<<<< HEAD
+=======
+               
+>>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
                 <br><button type="submit" class="site-btn">Place order</button>
 
             </ul>
@@ -272,11 +344,14 @@ else{
      
     }).render('#paypal-button-container');
   </script>
+<<<<<<< HEAD
 
 <script>
 document.getElementById("result").innerHTML=localStorage.getItem("textvalue");
 </script>
 
+=======
+>>>>>>> 0f21d5e872679bd3d8e6e02277dbe5d46acce1b1
  
   @endpush
  
